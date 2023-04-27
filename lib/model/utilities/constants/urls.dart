@@ -1,5 +1,6 @@
 // base url
-const String baseUrl = "https://phplaravel-779602-2789902.cloudwaysapps.com/";
+// const String baseUrl = "https://phplaravel-779602-2789902.cloudwaysapps.com/";
+const String baseUrl = "localhost:3002/";
 
 // authentication urls
 const String registerUrl = "${baseUrl}api/register";

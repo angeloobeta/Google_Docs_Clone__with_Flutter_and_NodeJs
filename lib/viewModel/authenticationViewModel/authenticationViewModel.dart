@@ -4,12 +4,10 @@ import 'package:google_docs_clone/model/utilities/imports/generalImport.dart';
 
 class AuthenticationRepository extends BaseModel {
   final GoogleSignIn _googleSignIn;
-  final Client _client;
+  final NewUser newUser;
 
-  AuthenticationRepository(
-      {required GoogleSignIn googleSignIn, required Client client})
-      : _googleSignIn = googleSignIn,
-        _client = client;
+  AuthenticationRepository(this.newUser, {required GoogleSignIn googleSignIn})
+      : _googleSignIn = googleSignIn;
 
   void signInWithGoogle() async {
     try {
@@ -22,15 +20,19 @@ class AuthenticationRepository extends BaseModel {
         developer.log(user.photoUrl!);
         developer.log(user.serverAuthCode!);
 
-        final userAcc = UserModel(
-            profilePics: user.photoUrl!,
-            name: user.displayName!,
-            email: user.email,
-            uuid: '',
-            token: '');
+        // final userAcc = UserModel(
+        //     profilePics: user.photoUrl,
+        //     name: user.displayName!,
+        //     email: user.email,
+        //     uuid: '',
+        //     token: '');
       }
-      
-      _client.post(url)
+      // send request to register user
+      await newUser.createAccountFunction(
+          name: user!.displayName!,
+          email: user.email,
+          profilePics: user.photoUrl!,
+          cancellationToken: cancellationToken);
     } catch (e) {
       developer.log(e.toString());
     }

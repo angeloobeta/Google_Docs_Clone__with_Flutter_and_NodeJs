@@ -1,19 +1,19 @@
-class UserModel {
+class CreateAccountResponse {
   final String profilePics;
   final String name;
   final String email;
   final String uuid;
   final String token;
 
-  UserModel(
+  CreateAccountResponse(
       {required this.profilePics,
       required this.name,
       required this.email,
       required this.uuid,
       required this.token});
 
-  factory UserModel.fromMap(Map<String, String> map) {
-    return UserModel(
+  factory CreateAccountResponse.fromMap(Map<String, dynamic> map) {
+    return CreateAccountResponse(
         profilePics: map['profilePics'] ?? '',
         name: map['name'] ?? '',
         email: map['email'] ?? '',

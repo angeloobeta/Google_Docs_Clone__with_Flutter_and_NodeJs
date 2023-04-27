@@ -6,5 +6,6 @@ export 'modelsImport.dart';
 export 'pagesImport.dart';
 export 'pluginImport.dart';
 export 'reusableWidgetImport.dart';
+export 'serviceImport.dart';
 export 'uiElementsImport.dart';
 export 'viewModelImport.dart';
