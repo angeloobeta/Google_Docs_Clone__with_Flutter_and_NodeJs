@@ -2,6 +2,7 @@ export 'package:flutter_svg/svg.dart';
 export 'package:google_fonts/google_fonts.dart';
 export 'package:google_sign_in/google_sign_in.dart';
 export 'package:http/http.dart';
+export 'package:http_client_helper/http_client_helper.dart';
 export 'package:intl/intl.dart';
 export 'package:keyboard_dismisser/keyboard_dismisser.dart';
 export 'package:line_icons/line_icon.dart';

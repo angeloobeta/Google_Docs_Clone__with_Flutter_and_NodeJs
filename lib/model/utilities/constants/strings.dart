@@ -56,3 +56,8 @@ final Map<int, Color> primarySwatchColor = {
   800: blue.withOpacity(0.9),
   900: blue.withOpacity(1.0),
 };
+
+// Instance
+
+ValidateEmailAddress validateEmailAddress = ValidateEmailAddress();
+LocalStorage localStorage = LocalStorage();

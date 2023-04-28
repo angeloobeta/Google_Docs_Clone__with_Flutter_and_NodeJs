@@ -7,10 +7,23 @@ class NewUser {
       {required String name,
       required String email,
       required String profilePics,
-      required CancellationToken cancellationToken}) async {
-    // Map<String, String> header = {"x-api-key": "MonieTreeeKey"};
-    var data = {"name": name, "email": email, "profilePics": profilePics};
-    var url = baseUrl + "createAccountUrl";
+      required CancellationToken,
+      String? uid,
+      String,
+      token,
+      cancellationToken}) async {
+    Map<String, String> header = {
+      "Content-Type": "application/json",
+      "Charset": "UTF-8"
+      // "x-api-key": "MonieTreeeKey"
+    };
+    var data = {
+      "name": name,
+      "email": email,
+      "profilePics": profilePics,
+      "uid": uid ?? ''
+    };
+    var url = baseUrl + registerUrl;
     try {
       var respond = HttpClientHelper.post(
         Uri.parse(url),

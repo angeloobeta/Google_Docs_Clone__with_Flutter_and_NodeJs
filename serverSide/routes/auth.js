@@ -4,7 +4,7 @@ const User = require('../models/user');
 const  authRouter = express.Router();
 
 // REST API
-authRouter.post("api/signup",async (request, response) => {
+authRouter.post("api/register",async (request, response) => {
     try {
         const {name, email, profilePicture} = request.body;
         let user = await User.findOne({email});
@@ -14,10 +14,12 @@ authRouter.post("api/signup",async (request, response) => {
         }
         // return the response of the
         response.json({user});
-    } catch (e) {}
+    } catch (e) {
+        response.status(200).json({e: e.message});
+    }
 });
 
-authRouter.get("api/sign",(request, response) => {
+authRouter.get("api/login",(request, response) => {
 
 });
 
