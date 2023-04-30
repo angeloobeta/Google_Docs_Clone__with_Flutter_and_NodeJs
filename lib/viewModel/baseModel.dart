@@ -3,15 +3,16 @@ import 'dart:developer' as developer;
 import 'package:google_docs_clone/model/utilities/imports/generalImport.dart';
 
 class BaseModel extends ChangeNotifier {
-  final GoogleSignIn _googleSignIn;
-  final NewUser newUser;
+  //?? cancellation Token
+  CancellationToken cancellationToken = CancellationToken();
+  final GoogleSignIn? _googleSignIn;
 
-  BaseModel(this.newUser, {required GoogleSignIn googleSignIn})
+  BaseModel({required GoogleSignIn googleSignIn})
       : _googleSignIn = googleSignIn;
 
   void signInWithGoogle() async {
     try {
-      final user = await _googleSignIn.signIn();
+      final user = await _googleSignIn?.signIn();
       if (user != null) {
         // log files
         developer.log(user.id);
@@ -26,13 +27,15 @@ class BaseModel extends ChangeNotifier {
         //     email: user.email,
         //     uuid: '',
         //     token: '');
+
+        // save user data to database
+        await NewUser.createAccountFunction(
+            name: user.displayName!,
+            email: user.email,
+            profilePics: user.photoUrl!,
+            cancellationToken: cancellationToken);
       }
       // send request to register user
-      await newUser.createAccountFunction(
-          name: user!.displayName!,
-          email: user.email,
-          profilePics: user.photoUrl!,
-          cancellationToken: cancellationToken);
     } catch (e) {
       developer.log(e.toString());
     }

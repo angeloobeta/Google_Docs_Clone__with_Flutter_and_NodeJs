@@ -1,22 +1,21 @@
+import 'dart:core';
 import 'dart:developer' as developer;
 
 import 'package:google_docs_clone/model/utilities/imports/generalImport.dart';
 
 class NewUser {
-  Future createAccountFunction(
-      {required String name,
-      required String email,
-      required String profilePics,
-      required CancellationToken,
-      String? uid,
-      String,
-      token,
-      cancellationToken}) async {
+  static Future createAccountFunction({
+    required String name,
+    required String email,
+    required String profilePics,
+    required CancellationToken cancellationToken,
+    String? uid,
+  }) async {
     Map<String, String> header = {
-      "Content-Type": "application/json",
-      "Charset": "UTF-8"
-      // "x-api-key": "MonieTreeeKey"
+      'Accept': "application/json",
+      "x-auth-key": "GoogleCloneKey"
     };
+
     var data = {
       "name": name,
       "email": email,
@@ -40,12 +39,12 @@ class NewUser {
           Map<String, dynamic> decoded = json.decode(parsed);
           developer.log("");
           developer.log('CreateAccountResponse i am decoded $decoded');
-          return CreateAccountResponse.fromMap(decoded);
+          return CreateAccountResponse.fromJson(decoded);
         } else {
           Map<String, dynamic> decoded = json.decode(parsed);
           developer.log("");
           developer.log('CreateAccountError i am decoded $decoded');
-          return CreateAccountError.fromMap(decoded);
+          return CreateAccountErrorResponse.fromJson(decoded);
         }
       });
       return respond;

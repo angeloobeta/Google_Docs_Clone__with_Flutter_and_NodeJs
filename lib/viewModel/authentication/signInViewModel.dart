@@ -2,9 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:google_docs_clone/model/utilities/imports/generalImport.dart';
 
 class SignInViewModel extends BaseModel {
-
-  //?? cancellation Token
-  CancellationToken? cancellationToken = CancellationToken();
+  SignInViewModel({required super.googleSignIn});
   //?? TextEditing controller
   TextEditingController emailAddressController = TextEditingController();
   TextEditingController loginPasswordController = TextEditingController();

@@ -1,19 +1,26 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const auth = require("./routes/auth");
+const cors = require("cors");
+const authRouter = require("./routes/authRoutes");
+
+
+// const app = express();
+const app = express();
 
 //PORT
-const  PORT =  process.env.PORT | 3001;
-const app = express(PORT, "0.0.0.0", () => {
+const  PORT =  process.env.PORT | 3030;
+ app.listen(PORT, "localhost", () => {
     console.log(`Connected at Port: ${PORT}`);
 });
-app.use(auth);
+
+app.use(cors());
 app.use(express.json());
+app.use(authRouter);
 
 
 
 //DB URL
-const DB = "";
+const DB = "mongodb+srv://mongodb:96951358@cluster0.zmqvuso.mongodb.net/test";
 
 mongoose.connect(DB).then(()=>{
     console.log(`Connection successful`);
@@ -21,3 +28,5 @@ mongoose.connect(DB).then(()=>{
 }).catch((e) => {
     console.log(e);
 });
+
+

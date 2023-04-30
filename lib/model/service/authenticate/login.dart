@@ -1,4 +1,4 @@
-import 'package:monietree_app/model/imports/generalImport.dart';
+import 'package:google_docs_clone/model/utilities/imports/generalImport.dart';
 
 class LoginUser {
   // function to login user

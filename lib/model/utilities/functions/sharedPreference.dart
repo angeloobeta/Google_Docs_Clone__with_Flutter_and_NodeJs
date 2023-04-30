@@ -27,21 +27,4 @@ class LocalStorage {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getStringList(key!);
   }
-
-  // get the state of complete kyc form
-  Future<bool> setCompleteKycField(String? key, bool value) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setBool(key!, value).then((value) {
-      print("value from shared preference");
-    });
-    return true;
-  }
-
-// set the state of complete kyc form
-  Future<bool?> getCompleteKycField(String? key) async {
-    final SharedPreferences pref = await SharedPreferences.getInstance();
-    bool? storage;
-    storage = pref.getBool(key!);
-    return storage;
-  }
 }
