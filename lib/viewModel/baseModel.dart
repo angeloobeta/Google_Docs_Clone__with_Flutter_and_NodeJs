@@ -5,10 +5,10 @@ import 'package:google_docs_clone/model/utilities/imports/generalImport.dart';
 class BaseModel extends ChangeNotifier {
   //?? cancellation Token
   CancellationToken cancellationToken = CancellationToken();
-  final GoogleSignIn? _googleSignIn;
+  GoogleSignIn? _googleSignIn;
 
-  BaseModel({required GoogleSignIn googleSignIn})
-      : _googleSignIn = googleSignIn;
+  // BaseModel({required GoogleSignIn googleSignIn})
+  //     : _googleSignIn = googleSignIn;
 
   void signInWithGoogle() async {
     try {

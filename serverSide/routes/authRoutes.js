@@ -6,9 +6,6 @@ const {response} = require("express");
 
 const  authRouter = express.Router();
 
-authRouter.get("/hello", async (request, response)=>{
-    response.json({"reply": "We are good"});
-})
 
 // REST API
 authRouter.post("/api/register",async (request, response) => {
@@ -28,6 +25,8 @@ authRouter.post("/api/register",async (request, response) => {
         response.status(500).json({error: e.message});
     }
 });
+
+
 
 authRouter.get("/",authMiddleWares, async (request, response) => {
     const user = await User.findById(request.user);

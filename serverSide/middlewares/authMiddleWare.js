@@ -16,8 +16,11 @@ const authMiddleWare = async (request, response, next) => {
                 .json({message: "Token verification failed, authorization denied"})
         }
 
-        request.user = verified.id;
-        request.token = token;
+        // request.user = verified.id;
+        // request.token = token;
+
+        response.user = verified.id;
+        response.token = token;
         next();
     }catch(e){
         response.status(500).json({e: e.message});
