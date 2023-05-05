@@ -2,7 +2,7 @@ const express = require("express");
 const Document = require("../models/documents");
 const documentRouter = express.Router();
 const middleWare = require("../middlewares/authMiddleWare");
-const {id} = require("socket.io/lib/client");
+// const {id} = require("socket.io/lib/client");
 const authRouter = require("./authRoutes");
 
 
