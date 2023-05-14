@@ -24,20 +24,19 @@ app.use(documentRouter);
 
 
 
-// mongoose.connect(DB).then(()=>{
-//     console.log(`Connection successful`);
-//     console.log(`E don enter`);
-// }).catch((e) => {
-//     console.log(e);
-// });
+mongoose.connect(DB).then(()=>{
+    printLog(`MongoDB connection de successful`);
+}).catch((e) => {
+    printLog(e);
+});
 
 
 // console.log(`This is before the socket-connection`);
 io.on("connection", (socket) =>{
-  console.log('A client has connected ');
-    console.log("Socket connected at Port:" + socket.id);
+  printLog('A client has connected ');
+    printLog("Socket connected at Port:" + socket.id);
   socket.on('disconnect', () => {
-    console.log('A client has disconnected');
+    printLog('A client has disconnected');
   });
     socket.on('join', (documentId) =>{
         socket.join(documentId);
@@ -49,5 +48,8 @@ io.on("connection", (socket) =>{
 });
 
 server.listen(PORT, () => {
-  console.log(`Socket server is up and running on port ${PORT}`);
+  printLog("Server is up and de running on port " + PORT);
 });
+
+
+function printLog(message) {console.log(`${message}`);}

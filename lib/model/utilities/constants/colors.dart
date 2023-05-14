@@ -7,7 +7,6 @@ const transparent = Colors.transparent;
 const Color green = Color.fromRGBO(146, 202, 52, 1);
 const error = Colors.red;
 const Color red = Color.fromRGBO(231, 30, 103, 1);
-const Color button = Color.fromRGBO(51, 51, 57, 1);
 const Color black = Color.fromRGBO(28, 28, 35, 1);
 Color menuIcon = Color(int.parse("0xffB2D0CE"));
 const textFieldText = Color.fromRGBO(196, 196, 196, 1);
