@@ -18,7 +18,8 @@ class SignIn extends StatelessWidget {
                   Center(
                     child: ElevatedButton.icon(
                       onPressed: () {
-                        model.googleSignAuth.signInWithGoogle();
+                        model.onSignInWithGoogle(context);
+                        // model.googleSignAuth.signInWithGoogle();
                       },
                       icon: Image.asset(
                         'assets/images/g-logo-2.png',

@@ -1,5 +1,6 @@
 import 'dart:developer' as developer;
 
+import 'package:google_docs_clone/model/service/authenticate/login.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class GoogleSignAuth {
@@ -12,6 +13,8 @@ class GoogleSignAuth {
     try {
       final user = await _googleSignIn!.signIn();
       if (user != null) {
+        LoginUser.loginUser(phoneOrEmail: user.email, password: "password", baseUrl: "baseUrl", cancellationToken: "cancellationToken")
+        // call the method to send to the server side
         developer.log(user.id);
         developer.log(user.email);
         developer.log(user.displayName!);

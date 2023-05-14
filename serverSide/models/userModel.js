@@ -11,9 +11,11 @@ const userSchema = mongoose.Schema({
 
     profilePicture: {
         type: String,
-        required: true }
+        required: true,
+        trim:true
+    }
 });
 
 
-const User = mongoose.model('User', userSchema);
-module.exports = User;
+const UserModel = mongoose.model('User', userSchema);
+module.exports = UserModel;

@@ -37,13 +37,13 @@
 // }
 
 class CreateAccountResponse {
-  User? user;
+  UserModel? user;
   String? token;
 
   CreateAccountResponse({this.user, this.token});
 
   CreateAccountResponse.fromJson(Map<String, dynamic> json) {
-    user = json['user'] != null ? new User.fromJson(json['user']) : null;
+    user = json['user'] != null ? new UserModel.fromJson(json['user']) : null;
     token = json['token'];
   }
 
@@ -57,16 +57,16 @@ class CreateAccountResponse {
   }
 }
 
-class User {
+class UserModel {
   String? name;
   String? email;
   String? profilePicture;
   String? sId;
   int? iV;
 
-  User({this.name, this.email, this.profilePicture, this.sId, this.iV});
+  UserModel({this.name, this.email, this.profilePicture, this.sId, this.iV});
 
-  User.fromJson(Map<String, dynamic> json) {
+  UserModel.fromJson(Map<String, dynamic> json) {
     name = json['name'];
     email = json['email'];
     profilePicture = json['profilePicture'];

@@ -1,6 +1,6 @@
 const express = require('express');
 const jwt = require("jsonwebtoken");
-const User = require("../models/user");
+const userModel = require("../models/userModel");
 const authMiddleWares = require("../middlewares/authMiddleWare");
 const {response} = require("express");
 
@@ -11,9 +11,12 @@ const  authRouter = express.Router();
 authRouter.post("/api/register",async (request, response) => {
     try {
         const {name, email, profilePicture} = request.body;
-        let user = await User.findOne({email});
+
+        // check if user already exist
+        let user = await userModel.findOne({email});
+        console.log(user)
         if(!user){
-            user = new User({ name, email, profilePicture});
+            user = new userModel({ name, email, profilePicture});
             user = await user.save();
         }
 
@@ -29,7 +32,7 @@ authRouter.post("/api/register",async (request, response) => {
 
 
 authRouter.get("/",authMiddleWares, async (request, response) => {
-    const user = await User.findById(request.user);
+    const user = await userModel.findById(request.user);
     response.json({user, token: request.token})
 
 

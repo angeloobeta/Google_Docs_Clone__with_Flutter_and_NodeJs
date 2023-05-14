@@ -4,8 +4,9 @@ import 'package:google_docs_clone/model/utilities/imports/generalImport.dart';
 class SignInViewModel extends BaseModel {
   final googleSignAuth = GoogleSignAuth(googleSignIn: GoogleSignIn());
 
+  // sign with google
   onSignInWithGoogle(context) {
-    googleSignAuth;
+    googleSignAuth.signInWithGoogle();
   }
 
   //?? TextEditing controller

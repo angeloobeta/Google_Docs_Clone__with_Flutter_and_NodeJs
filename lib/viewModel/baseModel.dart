@@ -3,7 +3,6 @@ import 'package:google_docs_clone/model/utilities/imports/generalImport.dart';
 class BaseModel extends ChangeNotifier {
   //?? cancellation Token
   CancellationToken cancellationToken = CancellationToken();
-  GoogleSignIn? _googleSignIn;
 
   // BaseModel({required GoogleSignIn googleSignIn})
   //     : _googleSignIn = googleSignIn;
