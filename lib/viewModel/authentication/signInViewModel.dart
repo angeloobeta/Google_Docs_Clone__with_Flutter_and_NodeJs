@@ -1,3 +1,6 @@
+import 'dart:developer' as developer;
+
+import 'package:google_docs_clone/model/service/authenticate/login.dart';
 import 'package:google_docs_clone/model/utilities/functions/googleSignInAuth.dart';
 import 'package:google_docs_clone/model/utilities/imports/generalImport.dart';
 
@@ -5,8 +8,32 @@ class SignInViewModel extends BaseModel {
   final googleSignAuth = GoogleSignAuth(googleSignIn: GoogleSignIn());
 
   // sign with google
-  onSignInWithGoogle(context) {
-    googleSignAuth.signInWithGoogle();
+  onSignInWithGoogle(context) async {
+    try {
+      final user = await googleSignAuth.googleSign;
+      // user gmail details
+      // developer.log(user.id);
+      developer.log(user.email);
+      developer.log(user.displayName!);
+      developer.log(user.photoUrl!);
+
+      // run function
+      await runFunctionForApi(context,
+          functionToRunService: LoginUser.loginUser(
+              phoneOrEmail: user.email,
+              password: "password",
+              baseUrl: "baseUrl",
+              cancellationToken: cancellationToken),
+          functionToRunAfterService: (value) {
+        // developer.log(user.id);
+        developer.log(user.email);
+        developer.log(user.displayName!);
+        developer.log(user.photoUrl!);
+      });
+    } catch (e) {
+      developer.log("Nothing responded");
+      developer.log(e.toString());
+    }
   }
 
   //?? TextEditing controller
@@ -22,7 +49,7 @@ class SignInViewModel extends BaseModel {
   FocusNode emailAddressFocusNode = FocusNode();
 
   void cancel(BuildContext context) {
-    cancellationToken?.cancel();
+    cancellationToken.cancel();
     Navigator.pop(context);
     print("request cancelled");
   }
@@ -49,104 +76,38 @@ class SignInViewModel extends BaseModel {
   //     try {
   //       cancellationToken = CancellationToken();
   //       notifyListeners();
-  //       // load baseUrl
-  //       loadBaseurl().then((value) async {
-  //         loadingDialog(context,
-  //             text: "Kindly hold on, while we check for your account",
-  //             onWillPop: () {
-  //           return cancel(context);
-  //         });
-  //         await LoginUser.loginUser(
-  //                 cancellationToken: cancellationToken!,
-  //                 baseUrl: baseUrl,
-  //                 phoneOrEmail: loginPhoneController.text.trim(),
-  //                 password: loginPasswordController.text.trim())
-  //             .then((value) async {
-  //           if (value is LoginResponse) {
-  //             Navigator.pop(context);
-  //             await localStorage.setString(token, value.token!);
-  //             print(" This is token ==>   ${value.token}");
+  //       runFunctionForApi(context,
+  //           functionToRunService: LoginUser.loginUser(
+  //               cancellationToken: cancellationToken!,
+  //               baseUrl: baseUrl,
+  //               phoneOrEmail: emailAddressController.text.trim(),
+  //               password: loginPasswordController.text.trim()),
   //
-  //             await localStorage.setString(name, value.lastName!);
-  //             await localStorage.setString(accountIDString, value.id!);
-  //             Navigator.pushReplacementNamed(context, '/homePage');
-  //           } else if (value is LoginError) {
-  //             Navigator.pop(context);
-  //             loaderWithClose(
-  //               context,
-  //               text: value.message!,
-  //             );
-  //             //print("error");
-  //           }
-  //           /* else if(value is String){
+  //           // function to run after service
+  //           functionToRunAfterService: (value) async {
+  //         if (value is LoginResponse) {
+  //           Navigator.pop(context);
+  //           await LocalStorage.setString(token, value.token!);
+  //           print(" This is token ==>   ${value.token}");
+  //
+  //           await LocalStorage.setString(name, value.lastName!);
+  //           await LocalStorage.setString(accountIDString, value.id!);
+  //           Navigator.pushReplacementNamed(context, '/homePage');
+  //         } else if (value is LoginError) {
+  //           Navigator.pop(context);
+  //           loaderWithClose(
+  //             context,
+  //             text: value.message!,
+  //           );
+  //           //print("error");
+  //         }
+  //         /* else if(value is String){
   //            Navigator.pop(context);
   //            loaderWithClose(context, text: 'Error! Unable to access host sever.',);
   //          }*/
-  //         }).catchError((errorValue, stackTrace) {
-  //           print('i am error value $errorValue');
-  //           print(stackTrace);
-  //           if (errorValue is SocketException) {
-  //             Navigator.pop(context);
-  //             loaderWithClose(
-  //               context,
-  //               text:
-  //                   "Unable to complete request, kindly check your internet connection and try again",
-  //             );
-  //           }
-  //           if (errorValue is FormatException) {
-  //             loaderWithClose(context, text: errorValue.toString(), onTap: () {
-  //               Navigator.pop(context);
-  //               Navigator.pop(context);
-  //             });
-  //           } else if (errorValue is SocketException) {
-  //             Navigator.pop(context);
-  //             loaderWithClose(
-  //               context,
-  //               text:
-  //                   "Unable to complete request, kindly check your internet connection and try again",
-  //             );
-  //           } else if (errorValue
-  //               .toString()
-  //               .contains("Null check operator used on a null value")) {
-  //             loaderWithClose(context,
-  //                 text:
-  //                     'Ensure your internet connection is on and your base url is correct',
-  //                 onTap: () {
-  //               Navigator.pop(context);
-  //               Navigator.pop(context);
-  //             });
-  //           } else if (errorValue.toString().contains(
-  //                   'Invalid argument(s): No host specified in URI') ||
-  //               errorValue.toString().contains('No host specified in URI') ||
-  //               errorValue
-  //                   .toString()
-  //                   .contains(" The error handler of Future.catchError")) {
-  //             loaderWithClose(context, text: 'Invalid base url', onTap: () {
-  //               Navigator.pop(context);
-  //               Navigator.pop(context);
-  //             });
-  //           }
-  //         });
-  //         ;
   //       });
-  //     } catch (errorValue) {
-  //       if (errorValue is SocketException) {
-  //         Navigator.pop(context);
-  //         loaderWithClose(
-  //           context,
-  //           text:
-  //               "Unable to complete request, kindly check your internet connection and try again",
-  //         );
-  //       } else if (errorValue
-  //               .toString()
-  //               .contains('Invalid argument(s): No host specified in URI') ||
-  //           errorValue.toString().contains('No host specified in URI')) {
-  //         print(errorValue);
-  //         loaderWithClose(context, text: 'Invalid base url', onTap: () {
-  //           Navigator.pop(context);
-  //           Navigator.pop(context);
-  //         });
-  //       }
+  //     } catch (e) {
+  //       developer.log(e.toString());
   //     }
   //   }
   // }

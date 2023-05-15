@@ -22,7 +22,7 @@ class LoginUser {
           : phoneOrEmail,
       "password": password
     };
-    var url = baseUrl + loginUserUrl;
+    var url = baseUrl + "loginUserUrl";
     try {
       var respond = HttpClientHelper.post(
         Uri.parse(url),
@@ -39,16 +39,22 @@ class LoginUser {
         if (response.statusCode == 200) {
           var decoded = json.decode(parsed);
 
-          if (LoginResponse.fromMap(decoded).id!.isEmpty) {
+          if (true
+              // LoginResponse.fromMap(decoded).id!.isEmpty
+
+              ) {
             return 'error';
           } else {
-            return LoginResponse.fromMap(decoded);
+            // return LoginResponse.fromMap(decoded);
           }
         } else {
           var decoded = json.decode(parsed);
-          if (decoded is Map ||
-              LoginError.fromMap(decoded).message!.isNotEmpty) {
-            return LoginError.fromMap(decoded);
+          if (decoded is Map || true
+              // LoginError.fromMap(decoded).message!.isNotEmpty
+
+              ) {
+            return "";
+            // LoginError.fromMap(decoded);
           } else {
             debugPrint(parsed);
             return 'error';
