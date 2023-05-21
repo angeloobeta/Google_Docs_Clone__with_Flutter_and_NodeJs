@@ -1,4 +1,5 @@
 const express = require("express");
+const printLog = require("./functions/printLog");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const http = require("http");
@@ -9,6 +10,10 @@ const documentRouter = require("./routes/documentRoutes");
 const app = express();
 var server = http.createServer(app);
 var io = require("socket.io")(server);
+
+
+// HOST
+const LOCALHOST = "localhost";
 
 //PORT
 const  PORT =  process.env.PORT | 3030;
@@ -47,9 +52,8 @@ io.on("connection", (socket) =>{
     });
 });
 
-server.listen(PORT, () => {
-  printLog("Server is up and de running on port " + PORT);
+server.listen(PORT, LOCALHOST,() => {
+  printLog("Server is up and de running on host: " + LOCALHOST +":" +PORT);
 });
 
 
-function printLog(message) {console.log(`${message}`);}

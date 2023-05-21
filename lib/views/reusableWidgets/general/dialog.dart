@@ -51,7 +51,7 @@ loadingNoScheduleDialog(BuildContext context,
 
 // loading dialog
 loadingDialog(BuildContext context,
-    {required String text,
+    {String? text,
     Color? color,
     Function? onWillPop,
     int? height,

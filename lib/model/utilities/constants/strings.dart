@@ -16,10 +16,10 @@ const String tokenKey = 'token';
 
 // page route string
 const String onBoard = '/onBoard';
-const String login = '/login';
+const String signIn = '/login';
 const String chatHomePage = "/ChatHomePage";
 const String newMessagePage = "/NewMessagePage";
-const String recentMessagePage = "/RecentMessagePage";
+const String homePage = "/HomePage";
 
 // error string
 const String networkError =

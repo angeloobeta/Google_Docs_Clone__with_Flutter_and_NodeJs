@@ -1,4 +1,5 @@
 import 'model/utilities/imports/generalImport.dart';
+import 'model/utilities/routeGenerator.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,6 +14,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
+      onGenerateRoute: RouteGenerator.generateRoute,
       home: SignIn(),
     );
   }

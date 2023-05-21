@@ -1,4 +1,5 @@
 const express = require('express');
+const printlog = require("../functions/printLog");
 const jwt = require("jsonwebtoken");
 const userModel = require("../models/userModel");
 const authMiddleWares = require("../middlewares/authMiddleWare");
@@ -14,7 +15,7 @@ authRouter.post("/api/register",async (request, response) => {
 
         // check if user already exist
         let user = await userModel.findOne({email});
-        console.log(user)
+        printlog(user)
         if(!user){
             user = new userModel({ name, email, profilePicture});
             user = await user.save();
