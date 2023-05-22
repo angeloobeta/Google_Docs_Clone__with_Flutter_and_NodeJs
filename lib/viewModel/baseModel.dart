@@ -1,40 +1,51 @@
+import 'dart:developer' as developer;
+
+import 'package:google_docs_clone/model/models/loginResponse.dart';
+import 'package:google_docs_clone/model/service/authenticate/login.dart';
+import 'package:google_docs_clone/model/utilities/functions/googleSignInAuth.dart';
 import 'package:google_docs_clone/model/utilities/imports/generalImport.dart';
 
 class BaseModel extends ChangeNotifier {
+  // google sigin
+  final googleSignAuth = GoogleSignAuth(googleSignIn: GoogleSignIn());
   //?? cancellation Token
   CancellationToken cancellationToken = CancellationToken();
 
-  // BaseModel({required GoogleSignIn googleSignIn})
-  //     : _googleSignIn = googleSignIn;
+  LoginResponse? loginResponse;
+  //
+  // sign with google
+  onSignInWithGoogle(context) async {
+    try {
+      // final user = await googleSignAuth.googleSign;
+      // user gmail details
+      // developer.log(user.id);
+      // developer.log(user.email);
+      // developer.log(user.displayName!);
+      // developer.log(user.photoUrl!);
 
-  // void signInWithGoogle() async {
-  //   try {
-  //     final user = await _googleSignIn?.signIn();
-  //     if (user != null) {
-  //       // log files
-  //       developer.log(user.id);
-  //       developer.log(user.email);
-  //       developer.log(user.displayName!);
-  //       developer.log(user.photoUrl!);
-  //       developer.log(user.serverAuthCode!);
-  //
-  //       // final userAcc = UserModel(
-  //       //     profilePics: user.photoUrl,
-  //       //     name: user.displayName!,
-  //       //     email: user.email,
-  //       //     uuid: '',
-  //       //     token: '');
-  //
-  //       // save user data to database
-  //       await NewUser.createAccountFunction(
-  //           name: user.displayName!,
-  //           email: user.email,
-  //           profilePics: user.photoUrl!,
-  //           cancellationToken: cancellationToken);
-  //     }
-  //     // send request to register user
-  //   } catch (e) {
-  //     developer.log(e.toString());
-  //   }
-  // }
+      // run function
+      await LoginUser.loginUser(
+              email: "nkechiruth@gmail.com",
+              // user.email,
+              displayName: "who is your guy",
+              // user.displayName,
+              cancellationToken: cancellationToken)
+          .then((value) async {
+        if (value is LoginError) {
+          developer.log(value.error!);
+          snackBarWidget(context, text: value.error!);
+        }
+        if (value is LoginResponse) {
+          loginResponse = value;
+          notifyListeners();
+          await LocalStorage.setString(tokenKey, loginResponse!.token!);
+          developer.log(" This is token ==>   ${loginResponse!.token!}");
+          Navigator.pushReplacementNamed(context, homePage);
+        }
+      });
+    } catch (e) {
+      developer.log("Nothing responded");
+      developer.log(e.toString());
+    }
+  }
 }

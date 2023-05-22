@@ -1,13 +1,9 @@
 import 'dart:developer' as developer;
 
-import 'package:google_docs_clone/model/service/authenticate/LoginError.dart';
 import 'package:google_docs_clone/model/service/authenticate/login.dart';
-import 'package:google_docs_clone/model/utilities/functions/googleSignInAuth.dart';
 import 'package:google_docs_clone/model/utilities/imports/generalImport.dart';
 
 class SignInViewModel extends BaseModel {
-  final googleSignAuth = GoogleSignAuth(googleSignIn: GoogleSignIn());
-
   //?? TextEditing controller
   TextEditingController emailAddressController = TextEditingController();
   TextEditingController loginPasswordController = TextEditingController();
@@ -24,34 +20,6 @@ class SignInViewModel extends BaseModel {
     cancellationToken.cancel();
     Navigator.pop(context);
     print("request cancelled");
-  }
-
-  // sign with google
-  onSignInWithGoogle(context) async {
-    try {
-      // final user = await googleSignAuth.googleSign;
-      // user gmail details
-      // developer.log(user.id);
-      // developer.log(user.email);
-      // developer.log(user.displayName!);
-      // developer.log(user.photoUrl!);
-
-      // run function
-      await LoginUser.loginUser(
-              email: "nkechiruth@gmail.com",
-              // user.email,
-              displayName: "who is your guy",
-              // user.displayName,
-              cancellationToken: cancellationToken)
-          .then((value) {
-        if (value is LoginError) {
-          developer.log(value.error!);
-        }
-      });
-    } catch (e) {
-      developer.log("Nothing responded");
-      developer.log(e.toString());
-    }
   }
 
   // login with email and password

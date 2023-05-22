@@ -1,8 +1,7 @@
 import 'dart:developer' as developer;
 
+import 'package:google_docs_clone/model/models/loginResponse.dart';
 import 'package:google_docs_clone/model/utilities/imports/generalImport.dart';
-
-import 'LoginError.dart';
 
 class LoginUser {
   // function to login user
@@ -44,13 +43,14 @@ class LoginUser {
       "profilePicture": "https://cloundinaryImage/#bshh22710r"
     };
     var url = registerUrl;
+    var body = jsonEncode(data);
     // + "loginUserUrl";
 
     try {
       var respond = await HttpClientHelper.post(
         Uri.parse(url),
         headers: header,
-        body: data,
+        body: body,
         cancelToken: cancellationToken,
         timeRetry: const Duration(milliseconds: 100),
         retries: 3,
@@ -62,13 +62,10 @@ class LoginUser {
           print("We got status 200");
           var decoded = json.decode(parsed!);
 
-          if (true
-              // LoginResponse.fromMap(decoded).id!.isEmpty
-
-              ) {
+          if (LoginResponse.fromMap(decoded).user!.Id!.isEmpty) {
             return 'error';
           } else {
-            // return LoginResponse.fromMap(decoded);
+            return LoginResponse.fromMap(decoded);
           }
         } else {
           var decoded = json.decode(parsed!);

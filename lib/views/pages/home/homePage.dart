@@ -10,30 +10,18 @@ class HomePage extends StatelessWidget {
     return ViewModelBuilder<SocketClientViewModel>.reactive(
       onViewModelReady: (model) async {
         // await model.onGetDocument(context);
-        model.socketRepository.joinRoom("documentId");
+        // model.socketRepository.joinRoom("documentId");
       },
       viewModelBuilder: () => SocketClientViewModel(),
       builder: (context, model, child) => BaseUi(
         children: [
           AdaptivePositioned(GeneralTextDisplay(
-              "Socket Connection", grey, 1, 12, FontWeight.normal, ""))
-
-          // AdaptivePositioned(Center(
-          //   child: Container(
-          //     width: sS(context).cW(width: 100),
-          //     child: ListView.builder(
-          //       itemCount: 6,
-          //       itemBuilder: (context, index) {
-          //         return S(
-          //           h: sS(context).cH(height: 50),
-          //           child: Card(
-          //             child: Center(),
-          //           ),
-          //         );
-          //       },
-          //     ),
-          //   ),
-          // ))
+              model.loginResponse!.user!.email!,
+              grey,
+              1,
+              12,
+              FontWeight.normal,
+              ""))
         ],
       ),
     );
