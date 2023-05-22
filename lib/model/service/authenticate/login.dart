@@ -2,6 +2,8 @@ import 'dart:developer' as developer;
 
 import 'package:google_docs_clone/model/utilities/imports/generalImport.dart';
 
+import 'LoginError.dart';
+
 class LoginUser {
   // function to login user
   static Future loginUser(
@@ -12,8 +14,9 @@ class LoginUser {
       String? token,
       required CancellationToken cancellationToken}) async {
     Map<String, String> header = {
-      // 'Accept': "application/json",
-      'Content-Type': "application/json"
+      'Accept': "application/json",
+      // 'Content-Type': 'application/json',
+      // 'Content-Type': "application/json"
 
       // "x-api-key": "x-auth-token"
     };
@@ -36,14 +39,15 @@ class LoginUser {
     // };
 
     var data = {
-      'name': "Castel Okorie",
-      'email': "castel@gmail.com",
-      'profilePicture': "https://cloundinaryImage/#bshh22710r"
+      "name": "Castel Okorie",
+      "email": "castel@gmail.com",
+      "profilePicture": "https://cloundinaryImage/#bshh22710r"
     };
     var url = registerUrl;
     // + "loginUserUrl";
+
     try {
-      var respond = HttpClientHelper.post(
+      var respond = await HttpClientHelper.post(
         Uri.parse(url),
         headers: header,
         body: data,
@@ -68,13 +72,13 @@ class LoginUser {
           }
         } else {
           var decoded = json.decode(parsed!);
-          if (decoded is Map || true
-              // LoginError.fromMap(decoded).message!.isNotEmpty
-
-              ) {
-            developer.log("This was printed");
-            return decoded;
-            // LoginError.fromMap(decoded);
+          if (decoded is Map || LoginError.fromMap(decoded).error!.isNotEmpty) {
+            // developer.log("LoginError was printed  $decoded");
+            // return decoded;
+            // developer.log("inside the login error");
+            developer
+                .log("check this out: ${LoginError.fromMap(decoded).error!}");
+            return LoginError.fromMap(decoded);
           } else {
             developer.log("This was printed ===========");
             debugPrint(parsed);

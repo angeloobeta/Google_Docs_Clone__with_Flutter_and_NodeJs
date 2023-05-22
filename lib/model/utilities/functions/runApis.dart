@@ -1,6 +1,4 @@
 // creating a function to prevent calling catch error and try catch in multiple places
-import 'dart:developer' as developer;
-
 import 'package:google_docs_clone/model/utilities/imports/generalImport.dart';
 
 runFunctionForApi(
@@ -21,7 +19,6 @@ runFunctionForApi(
       }
       if (value is Map) {
         Navigator.pop(context);
-        developer.log("This where the undefine error printed Map");
         loaderWithClose(context, text: value['message'] ?? undefinedError);
       }
     }).catchError((onError, stackTrace) {

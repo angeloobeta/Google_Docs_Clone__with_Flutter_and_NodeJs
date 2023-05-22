@@ -12,6 +12,8 @@ var server = http.createServer(app);
 var io = require("socket.io")(server);
 
 
+
+
 // HOST
 const LOCALHOST = "localhost";
 

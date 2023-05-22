@@ -1,5 +1,6 @@
 import 'dart:developer' as developer;
 
+import 'package:google_docs_clone/model/service/authenticate/LoginError.dart';
 import 'package:google_docs_clone/model/service/authenticate/login.dart';
 import 'package:google_docs_clone/model/utilities/functions/googleSignInAuth.dart';
 import 'package:google_docs_clone/model/utilities/imports/generalImport.dart';
@@ -42,13 +43,18 @@ class SignInViewModel extends BaseModel {
               displayName: "who is your guy",
               // user.displayName,
               cancellationToken: cancellationToken)
-          .then((value) => {});
+          .then((value) {
+        if (value is LoginError) {
+          developer.log(value.error!);
+        }
+      });
     } catch (e) {
       developer.log("Nothing responded");
       developer.log(e.toString());
     }
   }
 
+  // login with email and password
   loginWithEmailAndPassword(context) async {
     if (emailAddressController.text.isEmpty) {
       emailAddressError = true;
