@@ -1,27 +1,24 @@
 import 'package:google_docs_clone/model/utilities/imports/generalImport.dart';
 
-import '../../../viewModel/socketClient/socketClientViewModel.dart';
-
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<SocketClientViewModel>.reactive(
+    return ViewModelBuilder<BaseModel>.reactive(
       onViewModelReady: (model) async {
+        // model.onSignInWithGoogle(context);
         // await model.onGetDocument(context);
         // model.socketRepository.joinRoom("documentId");
       },
-      viewModelBuilder: () => SocketClientViewModel(),
+      viewModelBuilder: () => BaseModel(),
       builder: (context, model, child) => BaseUi(
+        safeTop: true,
         children: [
-          AdaptivePositioned(GeneralTextDisplay(
-              model.loginResponse!.user!.email!,
-              grey,
-              1,
-              12,
-              FontWeight.normal,
-              ""))
+          AdaptivePositioned(
+              left: 20,
+              GeneralTextDisplay(model.loginResponse!.user!.email!, grey, 1, 12,
+                  FontWeight.normal, ""))
         ],
       ),
     );

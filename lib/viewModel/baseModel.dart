@@ -6,7 +6,7 @@ import 'package:google_docs_clone/model/utilities/functions/googleSignInAuth.dar
 import 'package:google_docs_clone/model/utilities/imports/generalImport.dart';
 
 class BaseModel extends ChangeNotifier {
-  // google sigin
+  // google sign
   final googleSignAuth = GoogleSignAuth(googleSignIn: GoogleSignIn());
   //?? cancellation Token
   CancellationToken cancellationToken = CancellationToken();

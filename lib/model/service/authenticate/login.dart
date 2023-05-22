@@ -39,7 +39,7 @@ class LoginUser {
 
     var data = {
       "name": "Castel Okorie",
-      "email": "castel@gmail.com",
+      "email": "kiopks@gmail.com",
       "profilePicture": "https://cloundinaryImage/#bshh22710r"
     };
     var url = registerUrl;
@@ -51,6 +51,7 @@ class LoginUser {
         Uri.parse(url),
         headers: header,
         body: body,
+        // body: data,
         cancelToken: cancellationToken,
         timeRetry: const Duration(milliseconds: 100),
         retries: 3,
