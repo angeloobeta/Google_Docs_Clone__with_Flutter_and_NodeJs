@@ -45,7 +45,10 @@ class BaseModel extends ChangeNotifier {
       });
     } catch (e) {
       developer.log("Nothing responded");
+      snackBarWidget(context, text: networkError);
       developer.log(e.toString());
     }
   }
+
+  //
 }

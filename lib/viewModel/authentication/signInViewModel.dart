@@ -81,6 +81,15 @@ class SignInViewModel extends BaseModel {
            }*/
         });
       } catch (e) {
+        if (e.toString().contains("Null check operator used on a null value")) {
+          loaderWithClose(context,
+              text:
+                  'Ensure your internet connection is on and your base url is correct',
+              onTap: () {
+            Navigator.pop(context);
+            Navigator.pop(context);
+          });
+        }
         developer.log(e.toString());
       }
     }

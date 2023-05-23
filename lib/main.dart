@@ -1,3 +1,5 @@
+import 'package:google_docs_clone/views/pages/splashScreen.dart';
+
 import 'model/utilities/imports/generalImport.dart';
 import 'model/utilities/routeGenerator.dart';
 
@@ -15,7 +17,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       onGenerateRoute: RouteGenerator.generateRoute,
-      home: SignIn(),
+      home: SplashPage(),
     );
   }
 }

@@ -17,8 +17,15 @@ class HomePage extends StatelessWidget {
         children: [
           AdaptivePositioned(
               left: 20,
-              GeneralTextDisplay(model.loginResponse!.user!.email!, grey, 1, 12,
-                  FontWeight.normal, ""))
+              GeneralTextDisplay(
+                  model.loginResponse == null
+                      ? ""
+                      : model.loginResponse!.user!.email!,
+                  grey,
+                  1,
+                  12,
+                  FontWeight.normal,
+                  ""))
         ],
       ),
     );

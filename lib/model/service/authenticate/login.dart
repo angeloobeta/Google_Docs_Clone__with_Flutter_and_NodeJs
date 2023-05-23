@@ -13,8 +13,7 @@ class LoginUser {
       String? token,
       required CancellationToken cancellationToken}) async {
     Map<String, String> header = {
-      'Accept': "application/json",
-      // 'Content-Type': 'application/json',
+      'Content-Type': 'application/json',
       // 'Content-Type': "application/json"
 
       // "x-api-key": "x-auth-token"
@@ -71,14 +70,13 @@ class LoginUser {
         } else {
           var decoded = json.decode(parsed!);
           if (decoded is Map || LoginError.fromMap(decoded).error!.isNotEmpty) {
-            // developer.log("LoginError was printed  $decoded");
             // return decoded;
-            // developer.log("inside the login error");
             developer
                 .log("check this out: ${LoginError.fromMap(decoded).error!}");
             return LoginError.fromMap(decoded);
           } else {
-            developer.log("This was printed ===========");
+            developer
+                .log("This was printed inside login network else ===========");
             debugPrint(parsed);
             return 'error';
           }

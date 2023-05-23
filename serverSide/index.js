@@ -6,17 +6,15 @@ const http = require("http");
 const authRouter = require("./routes/authRoutes");
 const documentRouter = require("./routes/documentRoutes");
 
+
 // const app = express();
 const app = express();
 var server = http.createServer(app);
 var io = require("socket.io")(server);
 
 
-
-
 // HOST
 const LOCALHOST = "localhost";
-
 //PORT
 const  PORT =  process.env.PORT | 3030;
 //DB URL
@@ -29,11 +27,11 @@ app.use(authRouter);
 app.use(documentRouter);
 
 
-mongoose.connect(DB).then(()=>{
-    printLog(`MongoDB connection de successful`);
-}).catch((e) => {
-    printLog(e);
-});
+// mongoose.connect(DB).then(()=>{
+//     printLog(`MongoDB connection de successful`);
+// }).catch((e) => {
+//     printLog(e);
+// });
 
 
 // console.log(`This is before the socket-connection`);
@@ -51,6 +49,7 @@ io.on("connection", (socket) =>{
         socket.broadcast.to(data.room).emit('changes', data);
     });
 });
+
 
 server.listen(PORT, LOCALHOST,() => {
   printLog("Server is up and de running on host: " + LOCALHOST +":" +PORT);
