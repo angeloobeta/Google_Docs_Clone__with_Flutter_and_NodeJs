@@ -7,8 +7,9 @@ class SplashScreenViewModel extends BaseModel {
       Image.asset(
         'assets/images/docs-logo.png',
         key: const ValueKey('firstImage'),
+        height: 150,
+        width: 150,
       ),
-      S(w: 150)
     ],
   );
 

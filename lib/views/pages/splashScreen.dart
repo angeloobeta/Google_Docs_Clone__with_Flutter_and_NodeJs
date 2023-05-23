@@ -15,11 +15,16 @@ class SplashPage extends StatelessWidget {
         builder: (context, model, child) =>
             BaseUi(allowBackButton: false, children: [
               rowPositioned(
-                  child: AnimatedSwitcher(
-                      duration: const Duration(milliseconds: 800),
-                      child: model.image),
-                  top: 388,
-                  left: 98)
+                top: sS(context).h * 0.35,
+                child: Column(
+                  children: [
+                    GeneralTextDisplay(
+                        "Google Docs Clone", black, 1, 20, FontWeight.bold, ""),
+                    S(h: 50),
+                    model.image,
+                  ],
+                ),
+              )
             ]));
   }
 }
