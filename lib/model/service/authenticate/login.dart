@@ -57,7 +57,7 @@ class LoginUser {
         timeLimit: const Duration(seconds: 10),
       ).then((Response? response) {
         var parsed = response?.body;
-        debugPrint("This is parsed: $parsed");
+        // debugPrint("This is parsed: $parsed");
         if (response!.statusCode == 200) {
           print("We got status 200");
           var decoded = json.decode(parsed!);

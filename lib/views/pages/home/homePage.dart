@@ -7,10 +7,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<BaseModel>.reactive(
       onViewModelReady: (model) async {
-        // model.onSignInWithGoogle(context);
-        // await model.onGetDocument(context);
-        // model.socketRepository.joinRoom("documentId");
-        model.loginResponse;
+        model.onGetUserData(context);
       },
       viewModelBuilder: () => BaseModel(),
       builder: (context, model, child) => BaseUi(
@@ -19,9 +16,9 @@ class HomePage extends StatelessWidget {
           AdaptivePositioned(
               left: 20,
               GeneralTextDisplay(
-                  model.loginResponse == null
+                  model.getUserDataResponse == null
                       ? "Refresh"
-                      : model.loginResponse!.user!.email!,
+                      : model.getUserDataResponse!.user!.email!,
                   grey,
                   1,
                   12,
