@@ -10,6 +10,7 @@ class HomePage extends StatelessWidget {
         // model.onSignInWithGoogle(context);
         // await model.onGetDocument(context);
         // model.socketRepository.joinRoom("documentId");
+        model.loginResponse;
       },
       viewModelBuilder: () => BaseModel(),
       builder: (context, model, child) => BaseUi(
@@ -19,7 +20,7 @@ class HomePage extends StatelessWidget {
               left: 20,
               GeneralTextDisplay(
                   model.loginResponse == null
-                      ? ""
+                      ? "Refresh"
                       : model.loginResponse!.user!.email!,
                   grey,
                   1,

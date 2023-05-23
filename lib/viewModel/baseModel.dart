@@ -4,6 +4,7 @@ import 'package:google_docs_clone/model/models/loginResponse.dart';
 import 'package:google_docs_clone/model/service/authenticate/login.dart';
 import 'package:google_docs_clone/model/utilities/functions/googleSignInAuth.dart';
 import 'package:google_docs_clone/model/utilities/imports/generalImport.dart';
+import 'package:routemaster/routemaster.dart';
 
 class BaseModel extends ChangeNotifier {
   // google sign
@@ -24,6 +25,7 @@ class BaseModel extends ChangeNotifier {
       // developer.log(user.photoUrl!);
 
       // run function
+      // await LocalStorage.setString(tokenKey, "");
       await LoginUser.loginUser(
               email: "nkechiruth@gmail.com",
               // user.email,
@@ -38,9 +40,11 @@ class BaseModel extends ChangeNotifier {
         if (value is LoginResponse) {
           loginResponse = value;
           notifyListeners();
-          await LocalStorage.setString(tokenKey, loginResponse!.token!);
-          developer.log(" This is token ==>   ${loginResponse!.token!}");
-          Navigator.pushReplacementNamed(context, homePage);
+          // await LocalStorage.setString(tokenKey, loginResponse!.token!);
+          await LocalStorage.setString(tokenKey, "");
+          developer.log("token:   ${loginResponse!.token!}");
+          // Navigator.pushReplacementNamed(context, homePage);
+          Routemaster.of(context).replace(homePage);
         }
       });
     } catch (e) {

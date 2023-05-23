@@ -1,3 +1,7 @@
+import 'dart:developer' as developer;
+
+import 'package:routemaster/routemaster.dart';
+
 import '../model/utilities/imports/generalImport.dart';
 
 class SplashScreenViewModel extends BaseModel {
@@ -16,10 +20,15 @@ class SplashScreenViewModel extends BaseModel {
   future(context) async {
     await Future.delayed(const Duration(seconds: 3), () async {
       String? userToken = await LocalStorage.getString(tokenKey);
-      if (userToken == null || userToken == "token") {
-        Navigator.popAndPushNamed(context, signIn);
+      if (userToken == null || userToken == "token" || userToken == "") {
+        developer.log("There is not token currently");
+        // Navigator.popAndPushNamed(context, signIn);
+        Routemaster.of(context).replace(signIn);
       } else {
-        Navigator.pushReplacementNamed(context, homePage);
+        developer.log("This is the token: $userToken");
+        Routemaster.of(context).replace(homePage);
+        // Navigator.pushReplacementNamed(context, homePage);
+        // Navigator.popAndPushNamed(context, signIn);
       }
     });
   }

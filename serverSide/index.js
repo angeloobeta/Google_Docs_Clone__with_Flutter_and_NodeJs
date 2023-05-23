@@ -27,11 +27,11 @@ app.use(authRouter);
 app.use(documentRouter);
 
 
-// mongoose.connect(DB).then(()=>{
-//     printLog(`MongoDB connection de successful`);
-// }).catch((e) => {
-//     printLog(e);
-// });
+mongoose.connect(DB).then(()=>{
+    printLog(`MongoDB connection de successful`);
+}).catch((e) => {
+    printLog(e);
+});
 
 
 // console.log(`This is before the socket-connection`);
