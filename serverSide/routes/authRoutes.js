@@ -37,10 +37,10 @@ authRouter.post("/api/register",async (request, response) => {
 
 
 authRouter.get("/",authMiddleWares, async (request, response) => {
+    const user = await userModel.findById(request.user);
     // const user = await userModel.findById(request.user);
-    // const user = await userModel.findById(request.user);
-    // response.json({user, token: request.token})
-    response.json({token: request.token})
+    response.json({user, token: request.token})
+    // response.json({token: request.token})
 
 
 });
