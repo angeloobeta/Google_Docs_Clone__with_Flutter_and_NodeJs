@@ -11,6 +11,25 @@ class HomePage extends StatelessWidget {
       },
       viewModelBuilder: () => BaseModel(),
       builder: (context, model, child) => BaseUi(
+        appBar: AppBar(
+          elevation: 1,
+          backgroundColor: white,
+          actions: [
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                Icons.add,
+                color: black,
+              ),
+            ),
+            IconButton(
+              onPressed: () async {
+                model.onSignOut(context);
+              },
+              icon: const Icon(Icons.logout, color: red),
+            )
+          ],
+        ),
         safeTop: true,
         children: [
           AdaptivePositioned(

@@ -20,8 +20,14 @@ class BaseModel extends ChangeNotifier {
   // sign with google
   onSignInWithGoogle(context) async {
     try {
+      // final user = await googleSignAuth.googleSign;
+      // user gmail details
+      // developer.log(user.id);
+      // developer.log(user.email);
+      // developer.log(user.displayName!);
+      // developer.log(user.photoUrl!);
+
       // run function
-      // await LocalStorage.setString(tokenKey, "");
       await LoginUser.loginUser(
               email: "nkechiruth@gmail.com",
               // user.email,
@@ -75,5 +81,11 @@ class BaseModel extends ChangeNotifier {
       snackBarWidget(context, text: networkError);
       developer.log(e.toString());
     }
+  }
+
+  onSignOut(context) async {
+    await LocalStorage.setString(tokenKey, "");
+    await googleSignAuth.googleSignOut;
+    Navigator.pushReplacementNamed(context, signIn);
   }
 }

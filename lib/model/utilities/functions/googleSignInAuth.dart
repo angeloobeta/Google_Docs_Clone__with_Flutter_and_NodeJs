@@ -5,7 +5,8 @@ class GoogleSignAuth {
 
   GoogleSignAuth({required googleSignIn}) : _googleSignIn = googleSignIn;
 
-  get googleSign => _googleSignIn?.signIn();
+  get googleSignIn => _googleSignIn?.signIn();
+  get googleSignOut => _googleSignIn?.signOut();
 
   // signIn with google
   // void signInWithGoogle() async {
