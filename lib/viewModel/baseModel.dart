@@ -1,12 +1,12 @@
 import 'dart:developer' as developer;
 
+import 'package:go_router/go_router.dart';
 import 'package:google_docs_clone/model/models/getUserDataResponse.dart';
 import 'package:google_docs_clone/model/models/loginResponse.dart';
 import 'package:google_docs_clone/model/service/authenticate/getUserData.dart';
 import 'package:google_docs_clone/model/service/authenticate/login.dart';
 import 'package:google_docs_clone/model/utilities/functions/googleSignInAuth.dart';
 import 'package:google_docs_clone/model/utilities/imports/generalImport.dart';
-import 'package:routemaster/routemaster.dart';
 
 class BaseModel extends ChangeNotifier {
   // google sign
@@ -18,7 +18,7 @@ class BaseModel extends ChangeNotifier {
   GetUserDataResponse? getUserDataResponse;
   //
   // sign with google
-  onSignInWithGoogle(context) async {
+  onSignInWithGoogle(BuildContext context) async {
     try {
       // final user = await googleSignAuth.googleSign;
       // user gmail details
@@ -42,11 +42,10 @@ class BaseModel extends ChangeNotifier {
         if (value is LoginResponse) {
           loginResponse = value;
           notifyListeners();
-          // await LocalStorage.setString(tokenKey, loginResponse!.token!);
           await LocalStorage.setString(tokenKey, "");
           developer.log("token:   ${loginResponse!.token!}");
-          // Navigator.pushReplacementNamed(context, homePage);
-          Routemaster.of(context).replace(homePage);
+          // context.pushReplacementNamed("/$homePage");
+          context.go("/$homePage");
         }
       });
     } catch (e) {

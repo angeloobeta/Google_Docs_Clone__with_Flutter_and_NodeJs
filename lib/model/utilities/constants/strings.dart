@@ -15,11 +15,9 @@ ScreenSize sS(
 const String tokenKey = 'token';
 
 // page route string
-const String onBoard = '/onBoard';
-const String signIn = '/login';
-const String chatHomePage = "/ChatHomePage";
-const String newMessagePage = "/NewMessagePage";
-const String homePage = "/HomePage";
+const String splashPage = '/';
+const String signIn = 'loginPage';
+const String homePage = "homePage";
 
 // error string
 const String networkError =
