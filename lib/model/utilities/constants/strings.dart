@@ -18,6 +18,7 @@ const String tokenKey = 'token';
 const String splashPage = '/';
 const String signIn = '/loginPage';
 const String homePage = "/homePage";
+const String documentPage = "/documentPage";
 
 // error string
 const String networkError =

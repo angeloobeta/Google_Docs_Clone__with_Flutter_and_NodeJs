@@ -1,11 +1,15 @@
-import 'package:google_docs_clone/model/models/getUserDataResponse.dart';
+/models/getUserDataResponse.dart';
+import 'package:google_docs_clone/model/models/user/getUserDataResponse.dart';
 import 'package:google_docs_clone/model/utilities/imports/generalImport.dart';
 
 // class GetUserData {
 //   static Future getUserData(
 //       {required String token,
 //       required CancellationToken cancellationToken}) async {
-//     Map<String, String> header = {"x-authorisation-token": token};
+//     Map<String, String> header = {
+//       'Content-Type': 'application/json',
+//       "x-authorisation-token": token
+//     };
 //
 //     //
 //     try {
@@ -43,8 +47,6 @@ class GetUserData {
       {required String token,
       required CancellationToken cancellationToken}) async {
     Map<String, String> header = {
-      'accept': 'application/json',
-      // "Authorization": userToken,
       "x-authorisation-token": token
     };
     try {

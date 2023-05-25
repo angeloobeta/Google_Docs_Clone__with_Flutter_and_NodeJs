@@ -22,7 +22,7 @@ const documentSchema = mongoose.Schema(
     }
 );
 
-const Document = mongoose.model("Document",documentSchema);
+const documentModel = mongoose.model("Document",documentSchema);
 
 
-module.exports = Document;
+module.exports = documentModel;

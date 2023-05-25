@@ -1,8 +1,8 @@
 import 'dart:developer' as developer;
 
 import 'package:go_router/go_router.dart';
-import 'package:google_docs_clone/model/models/getUserDataResponse.dart';
-import 'package:google_docs_clone/model/models/loginResponse.dart';
+import 'package:google_docs_clone/model/models/user/getUserDataResponse.dart';
+import 'package:google_docs_clone/model/models/user/loginResponse.dart';
 import 'package:google_docs_clone/model/service/authenticate/getUserData.dart';
 import 'package:google_docs_clone/model/service/authenticate/login.dart';
 import 'package:google_docs_clone/model/utilities/functions/googleSignInAuth.dart';

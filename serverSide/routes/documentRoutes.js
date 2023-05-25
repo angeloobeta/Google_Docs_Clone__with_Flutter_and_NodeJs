@@ -7,7 +7,7 @@ const authRouter = require("./authRoutes");
 
 
 
-documentRouter.post("/doc/create", authRouter, async (request, response) => {
+documentRouter.post("/api/docs/create", authRouter, async (request, response) => {
     try{
         const {createdAt} = request.body;
         let document = new documentModel({
@@ -16,14 +16,14 @@ documentRouter.post("/doc/create", authRouter, async (request, response) => {
             createdAt
         });
 
-        document = document.save();
-        response.json(document);
+        document = await document.save();
+        response.json({document});
     }catch(e){
         response.status(500).json({error: e.message});
     }
 });
 
-documentRouter.post("/doc/title", authRouter, async (request, response) => {
+documentRouter.post("/api/docs/title", authRouter, async (request, response) => {
     try{
         const {id, title} = request.body;
         const document =  await documentModel.findByIdAndUpdate(id,{title})
@@ -34,7 +34,7 @@ documentRouter.post("/doc/title", authRouter, async (request, response) => {
 });
 
 
-documentRouter.get("/doc/:id", authRouter, async(request, response) => {
+documentRouter.get("/api/docs/:id", authRouter, async(request, response) => {
     try{
         const documents = await documentModel.findById(request.params.id);
         response.json(documents);
@@ -44,7 +44,7 @@ documentRouter.get("/doc/:id", authRouter, async(request, response) => {
 })
 
 // GET Document
-documentRouter.get("/doc/me", authRouter, (request, response) => {
+documentRouter.get("/api/docs/me", authRouter, (request, response) => {
     try{
         let documents  = await = documentModel.find({uid:request.user});
         response.json(documents);

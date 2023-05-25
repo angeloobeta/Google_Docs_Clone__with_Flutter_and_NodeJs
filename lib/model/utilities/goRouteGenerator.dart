@@ -27,7 +27,7 @@ class GoRouteGenerator {
               MaterialPage(key: state.pageKey, child: const HomePage()),
           routes: [
             GoRoute(
-                name: 'documentPage',
+                name: documentPage,
                 path: 'document/:id',
                 pageBuilder: (context, GoRouterState state) => MaterialPage(
                     key: state.pageKey,
@@ -50,4 +50,7 @@ class GoRouteGenerator {
   );
 }
 
+// String documentId(String id) {
+//   return document.where((id) => document.id.toString() == id);
+// }
 // look at the difference b/w builder and pageBuilder

@@ -2,12 +2,11 @@ import 'package:google_docs_clone/model/utilities/imports/generalImport.dart';
 
 class DocumentPage extends StatelessWidget {
   String? id;
-  DocumentPage({Key? key, required id}) : super(key: key);
+  DocumentPage({Key? key, required this.id}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<BaseModel>.reactive(
-      onViewModelReady: (model) async {},
       viewModelBuilder: () => BaseModel(),
       builder: (context, model, child) => BaseUi(
         appBar: AppBar(
