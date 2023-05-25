@@ -16,17 +16,16 @@ class SplashScreenViewModel extends BaseModel {
     ],
   );
 
-  future(BuildContext context) async {
+  future(context) async {
     await Future.delayed(const Duration(seconds: 3), () async {
       String? userToken = await LocalStorage.getString(tokenKey);
       if (userToken == null || userToken == "token" || userToken == "") {
         developer.log("There is not token currently");
         // Navigator.popAndPushNamed(context, signIn);
-        // Routemaster.of(context).replace(signIn);
-        context.pushReplacement("/$signIn");
+        GoRouter.of(context).pushReplacement(signIn);
       } else {
         // developer.log("This is the token: $userToken");
-        context.pushReplacement("/$homePage");
+        GoRouter.of(context).pushReplacement(homePage);
         // Navigator.pushReplacementNamed(context, homePage);
       }
     });

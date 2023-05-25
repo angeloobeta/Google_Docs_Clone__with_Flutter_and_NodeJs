@@ -18,7 +18,7 @@ class BaseModel extends ChangeNotifier {
   GetUserDataResponse? getUserDataResponse;
   //
   // sign with google
-  onSignInWithGoogle(BuildContext context) async {
+  onSignInWithGoogle(context) async {
     try {
       // final user = await googleSignAuth.googleSign;
       // user gmail details
@@ -42,10 +42,10 @@ class BaseModel extends ChangeNotifier {
         if (value is LoginResponse) {
           loginResponse = value;
           notifyListeners();
-          await LocalStorage.setString(tokenKey, "");
+          await LocalStorage.setString(tokenKey, loginResponse!.token!);
           developer.log("token:   ${loginResponse!.token!}");
           // context.pushReplacementNamed("/$homePage");
-          context.go("/$homePage");
+          GoRouter.of(context).pushReplacementNamed(homePage);
         }
       });
     } catch (e) {
@@ -85,6 +85,6 @@ class BaseModel extends ChangeNotifier {
   onSignOut(context) async {
     await LocalStorage.setString(tokenKey, "");
     await googleSignAuth.googleSignOut;
-    Navigator.pushReplacementNamed(context, signIn);
+    GoRouter.of(context).pushReplacementNamed(signIn);
   }
 }
