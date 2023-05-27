@@ -18,7 +18,8 @@ const LOCALHOST = "localhost";
 //PORT
 const  PORT =  process.env.PORT | 3030;
 //DB URL
-const DB = "mongodb+srv://mongodb:96951358@cluster0.zmqvuso.mongodb.net/test";
+// const DB = "mongodb+srv://mongodb:96951358@cluster0.zmqvuso.mongodb.net/test";
+const DB = "mongodb://localhost:27017/test";
 
 
 app.use(cors());
@@ -28,7 +29,7 @@ app.use(documentRouter);
 
 
 mongoose.connect(DB).then(()=>{
-    printLog(`MongoDB connection de successful`);
+    printLog(`MongoDB don connect successful`);
 }).catch((e) => {
     printLog(e);
 });
@@ -52,7 +53,7 @@ io.on("connection", (socket) =>{
 
 
 server.listen(PORT, LOCALHOST,() => {
-  printLog("Server is up and de running on host: " + LOCALHOST +":" +PORT);
+  printLog("Server de up and de running on host: " + LOCALHOST +":" +PORT);
 });
 
 

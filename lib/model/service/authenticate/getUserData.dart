@@ -1,4 +1,3 @@
-/models/getUserDataResponse.dart';
 import 'package:google_docs_clone/model/models/user/getUserDataResponse.dart';
 import 'package:google_docs_clone/model/utilities/imports/generalImport.dart';
 
@@ -46,9 +45,7 @@ class GetUserData {
   static Future getUserData(
       {required String token,
       required CancellationToken cancellationToken}) async {
-    Map<String, String> header = {
-      "x-authorisation-token": token
-    };
+    Map<String, String> header = {"x-authorisation-token": token};
     try {
       //
       var respond = get(Uri.parse(baseUrl), headers: header).then((response) {

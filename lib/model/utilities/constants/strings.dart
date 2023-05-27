@@ -27,7 +27,6 @@ const String undefinedError = 'Error occurred, try gain later';
 const String invalidBaseUrl = 'Unable to access host, invalid base url';
 const String notificationRead = "Notification marked as read";
 const String assetImagePlaceHolder = "assets/avatar.jpeg";
-const String assetImagePlaceHolderRecipient = "assets/avatar2.png";
 const String networkImagePlaceHolder =
     "https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250";
 const String invalidPassword =
@@ -57,6 +56,5 @@ final Map<int, Color> primarySwatchColor = {
 };
 
 // Instance
-
 ValidateEmailAddress validateEmailAddress = ValidateEmailAddress();
 LocalStorage localStorage = LocalStorage();

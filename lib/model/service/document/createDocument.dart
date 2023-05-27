@@ -1,52 +1,39 @@
 import 'dart:core';
-import 'dart:developer' as developer;
 
 import 'package:google_docs_clone/model/models/document/createDocumentResponse.dart';
 import 'package:google_docs_clone/model/utilities/imports/generalImport.dart';
 
 class CreateDocument {
-  static Future createDocumentFunction({
-    required String token,
-    required CancellationToken cancellationToken,
-    String? uid,
-  }) async {
+  // function to get user account details
+  static Future createDocumentFunction(
+      {required String token,
+      required CancellationToken cancellationToken}) async {
     Map<String, String> header = {
-      'Accept': "application/json",
+      "Content-Type": "application/json",
       "x-authorisation-token": token
     };
 
     var data = jsonEncode({
       "createAt": DateTime.now().millisecondsSinceEpoch,
-      // "title": "Untitled",
-      // "Content": "",
-      // "uid": uid ?? ''
     });
 
-    var url = createDocument;
     try {
-      var respond = HttpClientHelper.post(
-        Uri.parse(url),
-        headers: header,
-        body: data,
-        cancelToken: cancellationToken,
-        timeRetry: const Duration(milliseconds: 100),
-        retries: 3,
-        timeLimit: const Duration(seconds: 10),
-      ).then((Response? response) {
-        var parsed = response!.body;
+      //
+      var respond = post(Uri.parse(createDocument), headers: header, body: data)
+          .then((response) {
+        print(response.body);
+
         if (response.statusCode == 200) {
-          Map<String, dynamic> decoded = json.decode(parsed);
-          developer.log("");
-          developer.log('CreateDocumentResponse i am decoded $decoded');
-          return CreateDocumentResponse.fromJson(decoded);
+          var parsed = json.decode(response.body);
+          return CreateDocumentResponse.fromJson(parsed);
         } else {
-          Map<String, dynamic> decoded = json.decode(parsed);
-          developer.log("");
-          developer.log('CreateDocumentErrorResponse i am decoded $decoded');
-          return CreateAccountErrorResponse.fromJson(decoded);
+          return "error";
         }
       });
       return respond;
-    } on OperationCanceledError catch (_) {}
+    } on OperationCanceledError catch (e) {
+      debugPrint(e.stackTrace.toString());
+      debugPrint(e.msg.toString());
+    }
   }
 }

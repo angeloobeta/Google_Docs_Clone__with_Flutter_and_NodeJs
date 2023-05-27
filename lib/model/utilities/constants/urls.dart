@@ -8,9 +8,10 @@ const String loginUrl = "${baseUrl}api/login";
 const String logoutUrl = "${baseUrl}api/logout";
 
 //  document urls
-const String createDocument = "${baseUrl}/docs/create";
-const String titleDocument = "${baseUrl}/docs/title";
-const String documentId = "${baseUrl}/docs/:id";
+const String createDocument = "${baseUrl}api/docs/create";
+const String titleDocument = "${baseUrl}api/docs/title";
+const String documentId = "${baseUrl}api/docs/:id";
+const String getDocuments = "${baseUrl}api/docs/me";
 
 // user api url
 const String userDataUrl = "${baseUrl}api/user";
