@@ -60,28 +60,35 @@ class HomePage extends StatelessWidget {
           //     )),
           AdaptivePositioned(
               left: 20,
-              right: 20,
-              top: 45,
+              right: 100,
+              top: 30,
               S(
                 h: 600,
+                // w: 200,
                 child: ListView.builder(
                     itemCount: model.fetchAllDocumentResponse != null
                         ? model.fetchAllDocumentResponse?.documents!.length
                         : 0,
-                    itemBuilder: (context, index) => Card(
-                          child: InkWell(
-                            onTap: () => GoRouter.of(context)
-                                .goNamed(documentPage, pathParameters: {
-                              'id':
-                                  "${index + 1}: ${model.fetchAllDocumentResponse!.documents![index].sId.toString()}"
-                            }),
-                            child: GeneralTextDisplay(
-                                " ${index + 1}  ${model.fetchAllDocumentResponse!.documents![index].title.toString()}",
-                                black,
-                                1,
-                                14,
-                                FontWeight.normal,
-                                ""),
+                    itemBuilder: (context, index) => Container(
+                          margin: const EdgeInsets.only(top: 20),
+                          height: 50,
+                          child: Card(
+                            child: Center(
+                              child: InkWell(
+                                onTap: () => GoRouter.of(context)
+                                    .goNamed(documentPage, pathParameters: {
+                                  'id':
+                                      "${index + 1}: ${model.fetchAllDocumentResponse!.documents![index].sId.toString()}"
+                                }),
+                                child: GeneralTextDisplay(
+                                    " ${index + 1}  ${model.fetchAllDocumentResponse!.documents![index].title.toString()}",
+                                    black,
+                                    1,
+                                    14,
+                                    FontWeight.normal,
+                                    ""),
+                              ),
+                            ),
                           ),
                         )),
               ))
