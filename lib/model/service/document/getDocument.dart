@@ -1,28 +1,24 @@
 import 'dart:core';
 
-import 'package:google_docs_clone/model/models/user/getUserDataResponse.dart';
+import 'package:google_docs_clone/model/models/document/AllDocumentResponse.dart';
 import 'package:google_docs_clone/model/utilities/imports/generalImport.dart';
 
-class GetDocument {
+class GetAllDocument {
   // function to get user account details
-  static Future getDocumentFunction(
+  static Future getAllDocumentFunction(
       {required String token,
       required CancellationToken cancellationToken}) async {
     Map<String, String> header = {"x-authorisation-token": token};
     try {
       //
       var respond =
-          get(Uri.parse(getDocuments), headers: header).then((response) {
-        print(response.body);
+          get(Uri.parse(getAllDocumentUrl), headers: header).then((response) {
+        // print(response.body);
 
         if (response.statusCode == 200) {
-          var parsed = response.body;
-          List<GetUserDataResponse> listOfDocuments = [];
-          for (int i = 0; i < jsonDecode(parsed).length; i++) {
-            listOfDocuments
-                .add(GetUserDataResponse.fromMap(json.decode(parsed)[i]));
-          }
-          return listOfDocuments;
+          // Map<String, dynamic> parsed = json.decode(response.body);
+          // print(parsed);
+          return AllDocumentResponse.fromJson(jsonDecode(response.body));
         } else {
           return "error";
         }

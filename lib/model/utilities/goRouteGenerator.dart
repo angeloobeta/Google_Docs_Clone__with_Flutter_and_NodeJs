@@ -6,7 +6,7 @@ import 'package:google_docs_clone/views/pages/splashScreen.dart';
 
 class GoRouteGenerator {
   static GoRouter generateRoute = GoRouter(
-    debugLogDiagnostics: true,
+    // debugLogDiagnostics: true,
     initialLocation: splashPage,
     routes: [
       GoRoute(

@@ -60,11 +60,9 @@ class BaseModel extends ChangeNotifier {
     try {
       await LocalStorage.getString(tokenKey).then((token) async {
         // run function
-        await GetUserData.getUserData(
-                cancellationToken: cancellationToken, token: token!)
-            .then((value) async {
+        await GetUserData.getUserData(token: token!).then((value) async {
           if (value is LoginError) {
-            developer.log(value.error!);
+            developer.log("This is the error: ${value.error!}");
             snackBarWidget(context, text: value.error!);
           }
           if (value is GetUserDataResponse) {
@@ -84,7 +82,7 @@ class BaseModel extends ChangeNotifier {
 
   onSignOut(context) async {
     await LocalStorage.setString(tokenKey, "");
-    await googleSignAuth.googleSignOut;
+    await googleSignAuth.googleSignOut();
     GoRouter.of(context).pushReplacementNamed(signIn);
   }
 }

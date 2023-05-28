@@ -7,8 +7,9 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<DocumentViewModel>.reactive(
-      onViewModelReady: (model) async {
+      onViewModelReady: (model) {
         model.onGetUserData(context);
+        model.onFetchAllDocument(context);
       },
       viewModelBuilder: () => DocumentViewModel(),
       builder: (context, model, child) => BaseUi(
@@ -36,9 +37,9 @@ class HomePage extends StatelessWidget {
           AdaptivePositioned(
               left: 20,
               GeneralTextDisplay(
-                  model.getUserDataResponse == null
-                      ? "Refresh"
-                      : model.getUserDataResponse!.user!.email!,
+                  model.getUserDataResponse?.user != null
+                      ? model.getUserDataResponse!.user!.email!
+                      : "Refreshing",
                   grey,
                   1,
                   12,
@@ -46,34 +47,15 @@ class HomePage extends StatelessWidget {
                   "")),
           AdaptivePositioned(
             left: 20,
-            // FutureBuilder(
-            //   future: GetDocument.getDocumentFunction(
-            //           token: "", cancellationToken: CancellationToken()),
-            //   builder: (context, snapshot) {
-            //     if (snapshot.connectionState == ConnectionState.waiting) {
-            //       return loading();
-            //     }
-            //     return ListView.builder(
-            //         itemCount: snapshot.data,
-            //         itemBuilder: (context, index) {
-            //           return ListView.builder(
-            //               itemCount: snapshot.data[index].,
-            //               itemBuilder: (context, index) {
-            //                 return Card(
-            //                   child: Text(""),
-            //                 );
-            //               });
-            //         });
-            //   },
-            // )
             S(
               child: ListView.builder(
-                  itemCount: model.getUserDataResponse != null
+                  itemCount: model.allDocumentResponse != null
                       ? model.getUserDataResponse!.user!.sId!.length
                       : 0,
                   itemBuilder: (context, index) {
-                    return Card(
-                      child: Text(""),
+                    return const Card(
+                      // child: Text(model.allDocumentResponse!.title![index]),
+                      child: Text("model.allDocumentResponse!.title![index]"),
                     );
                   }),
             ),

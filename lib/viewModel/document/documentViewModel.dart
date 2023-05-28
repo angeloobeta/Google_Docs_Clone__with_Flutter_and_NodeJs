@@ -1,4 +1,7 @@
+import 'dart:developer' as developer;
+
 import 'package:go_router/go_router.dart';
+import 'package:google_docs_clone/model/models/document/AllDocumentResponse.dart';
 import 'package:google_docs_clone/model/models/document/createDocumentResponse.dart';
 import 'package:google_docs_clone/model/models/user/getUserDataResponse.dart';
 import 'package:google_docs_clone/model/service/document/createDocument.dart';
@@ -9,6 +12,7 @@ class DocumentViewModel extends BaseModel {
   //
   CreateDocumentResponse? createDocumentResponse;
   GetUserDataResponse? getUserDataResponse;
+  AllDocumentResponse? allDocumentResponse;
 
   //
   onCreateDocument(context) async {
@@ -20,11 +24,13 @@ class DocumentViewModel extends BaseModel {
             .then((value) async {
           if (value is CreateDocumentResponse) {
             createDocumentResponse = value;
+            notifyListeners();
+            developer.log(
+                "This is the value of: ${createDocumentResponse!.document!.sId.toString()}");
             // snackBarWidget(context, text: "Document successfully created");
             GoRouter.of(context).goNamed(documentPage, pathParameters: {
               'id': createDocumentResponse!.document!.sId.toString()
             });
-            print("Hello");
           }
         });
       });
@@ -37,20 +43,21 @@ class DocumentViewModel extends BaseModel {
     CancellationToken cancellationToken = CancellationToken();
     try {
       await LocalStorage.getString(tokenKey).then((token) async {
-        await GetDocument.getDocumentFunction(
+        await GetAllDocument.getAllDocumentFunction(
                 token: token!, cancellationToken: cancellationToken)
             .then((value) async {
-          if (value is GetUserDataResponse) {
-            getUserDataResponse = value;
-            snackBarWidget(context, text: "Document successfully created");
-            GoRouter.of(context).goNamed(documentPage, pathParameters: {
-              'id': createDocumentResponse!.document!.sId.toString()
-            });
-            return getUserDataResponse;
+          if (value is AllDocumentResponse) {
+            print("the returned value is: $value");
+            allDocumentResponse = value;
+            notifyListeners();
+          } else {
+            print("the returned value is: $value");
           }
         });
       });
-    } catch (e) {}
+    } catch (e) {
+      print("error message for fetchAllDocuments: ${e.toString()}");
+    }
   }
 
   onUpdateDocument(context) async {}

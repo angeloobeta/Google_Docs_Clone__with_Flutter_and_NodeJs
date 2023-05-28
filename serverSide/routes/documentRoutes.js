@@ -36,25 +36,25 @@ documentRouter.post("/api/docs/title", authMiddleWares, async (request, response
 });
 
 
-// documentRouter.get("/api/docs/:id", authMiddleWares, async(request, response) => {
-//     try{
-//         const documents = await documentModel.findById(request.params.id);
-//         response.json({documents});
-//     }catch (e){
-//         response.status(500).json({e: e.message});
-//     }
-// });
-
-
 documentRouter.get("/api/docs/me", authMiddleWares, async (request, response) => {
-    printLog("Will the fetch all me document go through");
     try{
         let documents  = await  documentModel.find({uid: request.user});
-        printLog("This is the collection of documents: " + documents);
-        response.json(documents);
+        printLog(documents)
+        response.json({documents});
     }catch(e){
-        printLog("This is the collection of documents: " + documents);
+        // printLog("This is the collection of documents: " + documents);
         response.status(500).json({error: e.message});
+    }
+});
+
+
+documentRouter.get("/api/docs/:id", authMiddleWares, async(request, response) => {
+    try{
+        const document = await documentModel.findById(request.params.id);
+        printLog("This is the document Id:  "+ document);
+        response.json({document});
+    }catch (e){
+        response.status(500).json({e: e.message});
     }
 });
 

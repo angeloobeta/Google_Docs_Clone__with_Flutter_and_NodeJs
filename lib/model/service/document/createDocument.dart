@@ -19,8 +19,9 @@ class CreateDocument {
 
     try {
       //
-      var respond = post(Uri.parse(createDocument), headers: header, body: data)
-          .then((response) {
+      var respond =
+          post(Uri.parse(createDocumentUrl), headers: header, body: data)
+              .then((response) {
         print(response.body);
 
         if (response.statusCode == 200) {

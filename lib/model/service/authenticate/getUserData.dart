@@ -42,17 +42,13 @@ import 'package:google_docs_clone/model/utilities/imports/generalImport.dart';
 
 class GetUserData {
   // function to get user account details
-  static Future getUserData(
-      {required String token,
-      required CancellationToken cancellationToken}) async {
+  static Future getUserData({required String token}) async {
     Map<String, String> header = {"x-authorisation-token": token};
     try {
-      //
-      var respond = get(Uri.parse(baseUrl), headers: header).then((response) {
+      var respond =
+          get(Uri.parse(userDataUrl), headers: header).then((response) {
         var parsed = response.body;
-        // print("");
-        // print("This is the response-body of login user data");
-        print(response.body);
+        // print("This is response body of GetUserData ${response.body}");
 
         if (response.statusCode == 200) {
           Map<String, dynamic> decoded = json.decode(parsed);
