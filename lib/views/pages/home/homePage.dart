@@ -1,3 +1,4 @@
+import 'package:go_router/go_router.dart';
 import 'package:google_docs_clone/model/utilities/imports/generalImport.dart';
 import 'package:google_docs_clone/viewModel/document/documentViewModel.dart';
 
@@ -45,24 +46,45 @@ class HomePage extends StatelessWidget {
                   12,
                   FontWeight.normal,
                   "")),
+          // Positioned(
+          //     left: 20,
+          //     top: 50,
+          //     bottom: 20,
+          //     child: SingleChildScrollView(
+          //       child: Column(
+          //         children: model.fetchAllDocumentResponse!.documents!
+          //             .map((e) => GeneralTextDisplay(e.title.toString(), grey,
+          //                 1, 12, FontWeight.normal, ""))
+          //             .toList(),
+          //       ),
+          //     )),
           AdaptivePositioned(
-            left: 20,
-            top: 70,
-            S(
-              child: ListView.builder(
-                  itemCount: model.fetchAllDocumentResponse != null
-                      ? model.fetchAllDocumentResponse!.documents!.length
-                      : 0,
-                  itemBuilder: (context, index) {
-                    return Card(
-                      // child: Text(model.allDocumentResponse!.title![index]),
-                      child: Text(model
-                          .fetchAllDocumentResponse!.documents![index].title
-                          .toString()),
-                    );
-                  }),
-            ),
-          )
+              left: 20,
+              right: 20,
+              top: 45,
+              S(
+                h: 600,
+                child: ListView.builder(
+                    itemCount: model.fetchAllDocumentResponse != null
+                        ? model.fetchAllDocumentResponse?.documents!.length
+                        : 0,
+                    itemBuilder: (context, index) => Card(
+                          child: InkWell(
+                            onTap: () => GoRouter.of(context)
+                                .goNamed(documentPage, pathParameters: {
+                              'id':
+                                  "${index + 1}: ${model.fetchAllDocumentResponse!.documents![index].sId.toString()}"
+                            }),
+                            child: GeneralTextDisplay(
+                                " ${index + 1}  ${model.fetchAllDocumentResponse!.documents![index].title.toString()}",
+                                black,
+                                1,
+                                14,
+                                FontWeight.normal,
+                                ""),
+                          ),
+                        )),
+              ))
         ],
       ),
     );
