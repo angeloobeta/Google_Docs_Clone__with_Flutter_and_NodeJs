@@ -47,15 +47,18 @@ class HomePage extends StatelessWidget {
                   "")),
           AdaptivePositioned(
             left: 20,
+            top: 70,
             S(
               child: ListView.builder(
-                  itemCount: model.allDocumentResponse != null
-                      ? model.getUserDataResponse!.user!.sId!.length
+                  itemCount: model.fetchAllDocumentResponse != null
+                      ? model.fetchAllDocumentResponse!.documents!.length
                       : 0,
                   itemBuilder: (context, index) {
-                    return const Card(
+                    return Card(
                       // child: Text(model.allDocumentResponse!.title![index]),
-                      child: Text("model.allDocumentResponse!.title![index]"),
+                      child: Text(model
+                          .fetchAllDocumentResponse!.documents![index].title
+                          .toString()),
                     );
                   }),
             ),

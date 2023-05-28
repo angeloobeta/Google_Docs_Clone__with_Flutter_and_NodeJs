@@ -1,3 +1,4 @@
+import 'package:go_router/go_router.dart';
 import 'package:google_docs_clone/model/utilities/imports/generalImport.dart';
 
 class DocumentPage extends StatelessWidget {
@@ -10,21 +11,18 @@ class DocumentPage extends StatelessWidget {
       viewModelBuilder: () => BaseModel(),
       builder: (context, model, child) => BaseUi(
         appBar: AppBar(
+          leading: IconButton(
+            onPressed: () => GoRouter.of(context).pop(),
+            icon: const Icon(Icons.arrow_back_outlined, color: red),
+          ),
+          title: GeneralTextDisplay(
+              id.toString(), black, 1, 18, FontWeight.normal, ""),
           elevation: 1,
           backgroundColor: white,
           actions: [
             IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.add,
-                color: black,
-              ),
-            ),
-            IconButton(
-              onPressed: () async {
-                model.onSignOut(context);
-              },
-              icon: const Icon(Icons.logout, color: red),
+              onPressed: () => GoRouter.of(context).pop(),
+              icon: const Icon(Icons.save_rounded, color: black),
             )
           ],
         ),
@@ -33,14 +31,7 @@ class DocumentPage extends StatelessWidget {
           AdaptivePositioned(
               left: 20,
               GeneralTextDisplay(
-                  model.getUserDataResponse == null
-                      ? "Refresh"
-                      : model.getUserDataResponse!.user!.email!,
-                  grey,
-                  1,
-                  12,
-                  FontWeight.normal,
-                  ""))
+                  id.toString(), grey, 1, 12, FontWeight.normal, ""))
         ],
       ),
     );

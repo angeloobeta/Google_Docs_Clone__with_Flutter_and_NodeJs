@@ -37,9 +37,9 @@ class LoginUser {
     // };
 
     var data = {
-      "name": "Castel Okorie",
-      "email": "kiopks@gmail.com",
-      "profilePicture": "https://cloundinaryImage/#bshh22710r"
+      "name": "Anthony Onyema",
+      "email": "onyema-anthony@gmail.com",
+      "profilePicture": "https://cloundinaryImage/#bs092hh210r"
     };
     var url = registerUrl;
     var body = jsonEncode(data);

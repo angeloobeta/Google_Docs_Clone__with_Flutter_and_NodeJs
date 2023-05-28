@@ -82,7 +82,7 @@ class BaseModel extends ChangeNotifier {
 
   onSignOut(context) async {
     await LocalStorage.setString(tokenKey, "");
-    await googleSignAuth.googleSignOut();
+    await googleSignAuth.googleSignOut;
     GoRouter.of(context).pushReplacementNamed(signIn);
   }
 }

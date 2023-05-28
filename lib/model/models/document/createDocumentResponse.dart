@@ -20,7 +20,7 @@ class CreateDocumentResponse {
 
 class Document {
   String? title;
-  List<String>? content;
+  List<dynamic>? content;
   String? sId;
   int? iV;
 
@@ -28,7 +28,7 @@ class Document {
 
   Document.fromJson(Map<String, dynamic> json) {
     title = json['title'];
-    content = json['content'].cast<String>();
+    content = json['content'];
     sId = json['_id'];
     iV = json['__v'];
   }

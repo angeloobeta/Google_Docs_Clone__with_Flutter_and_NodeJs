@@ -14,7 +14,7 @@ documentRouter.post("/api/docs/create", authMiddleWares, async (request, respons
         const {createdAt} = request.body;
         let document = new documentModel({
             uid: request.user,
-            title: "Untitled Document",
+            title: "Untitled Docs",
             createdAt
         });
 

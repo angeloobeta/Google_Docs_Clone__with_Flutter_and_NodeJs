@@ -1,6 +1,6 @@
 import 'dart:core';
 
-import 'package:google_docs_clone/model/models/document/AllDocumentResponse.dart';
+import 'package:google_docs_clone/model/models/document/fetchAllDocumentResponse.dart';
 import 'package:google_docs_clone/model/utilities/imports/generalImport.dart';
 
 class GetAllDocument {
@@ -16,9 +16,9 @@ class GetAllDocument {
         // print(response.body);
 
         if (response.statusCode == 200) {
-          // Map<String, dynamic> parsed = json.decode(response.body);
-          // print(parsed);
-          return AllDocumentResponse.fromJson(jsonDecode(response.body));
+          var parsed = json.decode(response.body);
+          // print("This is parsed from all documents \n $parsed");
+          return FetchAllDocumentResponse.fromJson(parsed);
         } else {
           return "error";
         }
