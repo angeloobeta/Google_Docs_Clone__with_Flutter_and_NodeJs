@@ -1,5 +1,6 @@
 import 'dart:developer' as developer;
 
+import 'package:flutter_quill/flutter_quill.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_docs_clone/model/models/document/createDocumentResponse.dart';
 import 'package:google_docs_clone/model/models/document/fetchAllDocumentResponse.dart';
@@ -9,7 +10,16 @@ import 'package:google_docs_clone/model/service/document/getAllDocument.dart';
 import 'package:google_docs_clone/model/utilities/imports/generalImport.dart';
 
 class DocumentViewModel extends BaseModel {
-  //
+  // document title text controller
+  TextEditingController documentTitleEditingController = TextEditingController(
+      text: processLongString(
+          minimumStringLength: 8,
+          unProcessedString: "Untitled Document",
+          substringLength: 14));
+
+  // Quill controller
+  QuillController quillController = QuillController.basic();
+
   CreateDocumentResponse? createDocumentResponse;
   GetUserDataResponse? getUserDataResponse;
   FetchAllDocumentResponse? fetchAllDocumentResponse;
@@ -31,6 +41,8 @@ class DocumentViewModel extends BaseModel {
             GoRouter.of(context).goNamed(documentPage, pathParameters: {
               'id': createDocumentResponse!.document!.sId.toString()
             });
+            // update the list of document on creating a new document
+            onFetchAllDocument(context);
           }
         });
       });
@@ -61,5 +73,5 @@ class DocumentViewModel extends BaseModel {
     }
   }
 
-  onUpdateDocument(context) async {}
+  onUpdateDocumentTitle(context) async {}
 }
