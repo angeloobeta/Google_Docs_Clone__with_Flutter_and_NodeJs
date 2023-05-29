@@ -75,11 +75,14 @@ class HomePage extends StatelessWidget {
                           child: Card(
                             child: Center(
                               child: InkWell(
-                                onTap: () => GoRouter.of(context)
-                                    .goNamed(documentPage, pathParameters: {
-                                  'id':
-                                      "${index + 1}: ${model.fetchAllDocumentResponse!.documents![index].sId.toString()}"
-                                }),
+                                onTap: () {
+                                  GoRouter.of(context)
+                                      .goNamed(documentPage, pathParameters: {
+                                    'id':
+                                        "${index + 1}: ${model.fetchAllDocumentResponse!.documents![index].sId.toString()}"
+                                  });
+                                  model.onFetchAllDocument(context);
+                                },
                                 child: GeneralTextDisplay(
                                     " ${index + 1}  ${model.fetchAllDocumentResponse!.documents![index].title.toString()}",
                                     black,

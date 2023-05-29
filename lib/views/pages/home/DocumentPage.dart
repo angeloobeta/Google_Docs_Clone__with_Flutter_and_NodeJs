@@ -10,6 +10,9 @@ class DocumentPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<DocumentViewModel>.reactive(
       viewModelBuilder: () => DocumentViewModel(),
+      onViewModelReady: (model) {
+        model.onFetchAllDocument(context);
+      },
       builder: (context, model, child) => BaseUi(
         appBar: AppBar(
           leading: IconButton(
@@ -70,9 +73,26 @@ class DocumentPage extends StatelessWidget {
         safeTop: true,
         children: [
           AdaptivePositioned(
-              left: 20,
-              GeneralTextDisplay(
-                  id.toString(), grey, 1, 12, FontWeight.normal, ""))
+              top: 20,
+              left: 10,
+              right: 10,
+              S(
+                h: 600,
+                child: Column(
+                  children: [
+                    // quill.QuillToolbar.basic(controller: model.quillController),
+                    // Expanded(
+                    //   child: Card(
+                    //     elevation: 4,
+                    //     child: quill.QuillEditor.basic(
+                    //       controller: model.quillController,
+                    //       readOnly: false, // true for view only mode
+                    //     ),
+                    //   ),
+                    // )
+                  ],
+                ),
+              ))
         ],
       ),
     );

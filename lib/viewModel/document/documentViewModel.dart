@@ -1,6 +1,5 @@
 import 'dart:developer' as developer;
 
-import 'package:flutter_quill/flutter_quill.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_docs_clone/model/models/document/createDocumentResponse.dart';
 import 'package:google_docs_clone/model/models/document/fetchAllDocumentResponse.dart';
@@ -17,8 +16,11 @@ class DocumentViewModel extends BaseModel {
           unProcessedString: "Untitled Document",
           substringLength: 14));
 
+  // document text editing controller
+  TextEditingController? documentTextEditingController;
+
   // Quill controller
-  QuillController quillController = QuillController.basic();
+  // final QuillController quillController = QuillController.basic();
 
   CreateDocumentResponse? createDocumentResponse;
   GetUserDataResponse? getUserDataResponse;
