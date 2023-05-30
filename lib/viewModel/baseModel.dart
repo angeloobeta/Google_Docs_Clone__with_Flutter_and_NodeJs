@@ -1,22 +1,15 @@
 import 'dart:developer' as developer;
 
 import 'package:go_router/go_router.dart';
-import 'package:google_docs_clone/model/models/user/getUserDataResponse.dart';
-import 'package:google_docs_clone/model/models/user/loginResponse.dart';
-import 'package:google_docs_clone/model/service/authenticate/getUserData.dart';
-import 'package:google_docs_clone/model/service/authenticate/login.dart';
-import 'package:google_docs_clone/model/utilities/functions/googleSignInAuth.dart';
 import 'package:google_docs_clone/model/utilities/imports/generalImport.dart';
 
 class BaseModel extends ChangeNotifier {
   // google sign
   final googleSignAuth = GoogleSignAuth(googleSignIn: GoogleSignIn());
-  //?? cancellation Token
   CancellationToken cancellationToken = CancellationToken();
 
-  LoginResponse? loginResponse;
   GetUserDataResponse? getUserDataResponse;
-  //
+
   // sign with google
   onSignInWithGoogle(context) async {
     try {
@@ -35,16 +28,15 @@ class BaseModel extends ChangeNotifier {
               // user.displayName,
               cancellationToken: cancellationToken)
           .then((value) async {
-        if (value is LoginError) {
+        if (value is GetUserDataResponseError) {
           developer.log(value.error!);
           snackBarWidget(context, text: value.error!);
         }
-        if (value is LoginResponse) {
-          loginResponse = value;
+        if (value is GetUserDataResponse) {
+          getUserDataResponse = value;
           notifyListeners();
-          await LocalStorage.setString(tokenKey, loginResponse!.token!);
-          developer.log("token:   ${loginResponse!.token!}");
-          // context.pushReplacementNamed("/$homePage");
+          await LocalStorage.setString(tokenKey, getUserDataResponse!.token!);
+          developer.log("token:   ${getUserDataResponse!.token!}");
           GoRouter.of(context).pushReplacementNamed(homePage);
         }
       });
@@ -60,8 +52,8 @@ class BaseModel extends ChangeNotifier {
     try {
       await LocalStorage.getString(tokenKey).then((token) async {
         // run function
-        await GetUserData.getUserData(token: token!).then((value) async {
-          if (value is LoginError) {
+        await FetchUserData.fetchUserData(token: token!).then((value) async {
+          if (value is GetUserDataResponseError) {
             developer.log("This is the error: ${value.error!}");
             snackBarWidget(context, text: value.error!);
           }
@@ -69,7 +61,6 @@ class BaseModel extends ChangeNotifier {
             getUserDataResponse = value;
             notifyListeners();
             await LocalStorage.setString(tokenKey, getUserDataResponse!.token!);
-            // developer.log("token:   ${getUserDataResponse!.token!}");
           }
         });
       });

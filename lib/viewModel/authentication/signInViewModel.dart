@@ -1,6 +1,5 @@
 import 'dart:developer' as developer;
 
-import 'package:google_docs_clone/model/service/authenticate/login.dart';
 import 'package:google_docs_clone/model/utilities/imports/generalImport.dart';
 
 class SignInViewModel extends BaseModel {

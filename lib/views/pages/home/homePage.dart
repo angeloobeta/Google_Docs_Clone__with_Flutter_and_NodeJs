@@ -1,6 +1,5 @@
 import 'package:go_router/go_router.dart';
 import 'package:google_docs_clone/model/utilities/imports/generalImport.dart';
-import 'package:google_docs_clone/viewModel/document/documentViewModel.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);

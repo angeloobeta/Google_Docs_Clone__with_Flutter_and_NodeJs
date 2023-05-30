@@ -2,6 +2,7 @@ export 'package:google_docs_clone/model/utilities/functions/commaFormattedString
 export 'package:google_docs_clone/model/utilities/functions/commaFormattedTextField.dart';
 export 'package:google_docs_clone/model/utilities/functions/dateTime.dart';
 export 'package:google_docs_clone/model/utilities/functions/extensions.dart';
+export 'package:google_docs_clone/model/utilities/functions/googleSignInAuth.dart';
 export 'package:google_docs_clone/model/utilities/functions/localStorage.dart';
 export 'package:google_docs_clone/model/utilities/functions/numberConverter.dart';
 export 'package:google_docs_clone/model/utilities/functions/processLongString.dart';

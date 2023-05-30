@@ -9,8 +9,6 @@ ScreenSize sS(
 
 // socket.io instance
 
-// notification type strings
-
 // constant strings
 const String tokenKey = 'token';
 
@@ -33,12 +31,6 @@ const String invalidPassword =
     'Invalid password, Length must be more than 7 and contains lower case, upper case , digit and  symbol';
 const String isEmptyString = " must be filled";
 
-// strings for pin text
-
-// string for unitester
-
-// text for sharing applink
-
 // socket io channel name
 
 // primary swatch color map
@@ -56,5 +48,5 @@ final Map<int, Color> primarySwatchColor = {
 };
 
 // Instance
-ValidateEmailAddress validateEmailAddress = ValidateEmailAddress();
 LocalStorage localStorage = LocalStorage();
+ValidateEmailAddress validateEmailAddress = ValidateEmailAddress();

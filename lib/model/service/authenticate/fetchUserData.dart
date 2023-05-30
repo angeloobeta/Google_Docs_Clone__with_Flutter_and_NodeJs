@@ -1,4 +1,3 @@
-import 'package:google_docs_clone/model/models/user/getUserDataResponse.dart';
 import 'package:google_docs_clone/model/utilities/imports/generalImport.dart';
 
 // class GetUserData {
@@ -40,9 +39,9 @@ import 'package:google_docs_clone/model/utilities/imports/generalImport.dart';
 
 // this service is used to get the user details for google docs
 
-class GetUserData {
+class FetchUserData {
   // function to get user account details
-  static Future getUserData({required String token}) async {
+  static Future fetchUserData({required String token}) async {
     Map<String, String> header = {"x-authorisation-token": token};
     try {
       var respond =

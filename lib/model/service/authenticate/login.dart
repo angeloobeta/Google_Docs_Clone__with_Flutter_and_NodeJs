@@ -1,6 +1,5 @@
 import 'dart:developer' as developer;
 
-import 'package:google_docs_clone/model/models/user/loginResponse.dart';
 import 'package:google_docs_clone/model/utilities/imports/generalImport.dart';
 
 class LoginUser {
@@ -62,18 +61,19 @@ class LoginUser {
           print("We got status 200");
           var decoded = json.decode(parsed!);
 
-          if (LoginResponse.fromMap(decoded).user!.Id!.isEmpty) {
+          if (GetUserDataResponse.fromMap(decoded).user!.sId!.isEmpty) {
             return 'error';
           } else {
-            return LoginResponse.fromMap(decoded);
+            return GetUserDataResponse.fromMap(decoded);
           }
         } else {
           var decoded = json.decode(parsed!);
-          if (decoded is Map || LoginError.fromMap(decoded).error!.isNotEmpty) {
+          if (decoded is Map ||
+              GetUserDataResponseError.fromMap(decoded).error!.isNotEmpty) {
             // return decoded;
-            developer
-                .log("check this out: ${LoginError.fromMap(decoded).error!}");
-            return LoginError.fromMap(decoded);
+            developer.log(
+                "check this out: ${GetUserDataResponseError.fromMap(decoded).error!}");
+            return GetUserDataResponseError.fromMap(decoded);
           } else {
             developer
                 .log("This was printed inside login network else ===========");

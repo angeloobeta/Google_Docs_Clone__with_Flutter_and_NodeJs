@@ -1,6 +1,6 @@
+import 'package:flutter_quill/flutter_quill.dart' as quill;
 import 'package:go_router/go_router.dart';
 import 'package:google_docs_clone/model/utilities/imports/generalImport.dart';
-import 'package:google_docs_clone/viewModel/document/documentViewModel.dart';
 
 class DocumentPage extends StatelessWidget {
   String? id;
@@ -18,7 +18,6 @@ class DocumentPage extends StatelessWidget {
           leading: IconButton(
             onPressed: () {
               GoRouter.of(context).pop();
-              // model.onFetchAllDocument(context);
             },
             icon: const Icon(Icons.arrow_back_outlined, color: red),
           ),
@@ -80,16 +79,16 @@ class DocumentPage extends StatelessWidget {
                 h: 600,
                 child: Column(
                   children: [
-                    // quill.QuillToolbar.basic(controller: model.quillController),
-                    // Expanded(
-                    //   child: Card(
-                    //     elevation: 4,
-                    //     child: quill.QuillEditor.basic(
-                    //       controller: model.quillController,
-                    //       readOnly: false, // true for view only mode
-                    //     ),
-                    //   ),
-                    // )
+                    quill.QuillToolbar.basic(controller: model.quillController),
+                    Expanded(
+                      child: Card(
+                        elevation: 4,
+                        child: quill.QuillEditor.basic(
+                          controller: model.quillController,
+                          readOnly: false, // true for view only mode
+                        ),
+                      ),
+                    )
                   ],
                 ),
               ))

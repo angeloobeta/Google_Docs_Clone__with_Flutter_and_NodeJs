@@ -1,6 +1,4 @@
-import 'package:google_docs_clone/viewModel/splashScreen.dart';
-
-import '../../model/utilities/imports/generalImport.dart';
+import 'package:google_docs_clone/model/utilities/imports/generalImport.dart';
 
 class SplashPage extends StatelessWidget {
   const SplashPage({Key? key}) : super(key: key);

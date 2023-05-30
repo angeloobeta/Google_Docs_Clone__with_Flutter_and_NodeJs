@@ -1,6 +1,5 @@
 import 'dart:developer' as developer;
 
-import 'package:google_docs_clone/model/models/createAccountResponse.dart';
 import 'package:google_docs_clone/model/utilities/imports/generalImport.dart';
 
 class CreateAccountViewModel extends BaseModel {

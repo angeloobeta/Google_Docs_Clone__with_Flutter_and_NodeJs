@@ -1,5 +1,4 @@
 import 'package:google_docs_clone/model/utilities/imports/generalImport.dart';
-import 'package:google_docs_clone/viewModel/authentication/signInViewModel.dart';
 
 class SignIn extends StatelessWidget {
   const SignIn({Key? key}) : super(key: key);

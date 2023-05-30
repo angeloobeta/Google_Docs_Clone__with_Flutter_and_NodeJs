@@ -13,7 +13,6 @@ class NewUser {
   }) async {
     Map<String, String> header = {
       'Accept': "application/json",
-      "x-auth-key": "GoogleCloneKey"
     };
 
     var data = {
